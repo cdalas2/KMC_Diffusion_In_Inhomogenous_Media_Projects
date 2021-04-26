@@ -1,5 +1,5 @@
 # PHYS516FINAL
-<img src="BilayerAndProteinSurface.png " width="700" height="400"> 
+<img src="BilayerAndProteinSurface.png " width="650" height="400"> 
 
 <img src="Lattice.png " width="550" height="500">
 
