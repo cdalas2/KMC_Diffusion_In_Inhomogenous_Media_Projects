@@ -23,7 +23,7 @@
 
 #### Physical problem
 
-How do lipid bilayer deformations induced by a protein depend on the protein's shape?
+We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface with spacial varying diffusion rates. Our system will consist of $M=1600$ total monomer emerin proteins. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower ($D_{in} = 250$ nm$^{2}/$s) than that outside of it ($D_{out} = 3500$ nm$^{2}/$s); the diffusion rate is slower in the nanodomain due to the clustering of emerin proteins there. 
 
 #### Framing of the problem in mathematics 
 
