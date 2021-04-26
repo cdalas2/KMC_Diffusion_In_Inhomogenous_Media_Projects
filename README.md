@@ -3,7 +3,7 @@
 
 <img src="Lattice.png " width="550" height="500">
 
-> A kinetic monte carlo (KMC) method for predicting the trajectories of emerin monomer protein in heterogeneous media
+> A kinetic monte carlo (KMC) method for predicting the trajectories of freely diffusing emerin monomer protein in heterogeneous media
 
 ---
 
