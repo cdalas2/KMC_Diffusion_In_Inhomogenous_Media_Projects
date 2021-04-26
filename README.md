@@ -1,5 +1,5 @@
 # PHYS516FINAL
-##<img src="BilayerAndProteinSurface.png " width="600" height="400"> 
+<img src="BilayerAndProteinSurface.png " width="600" height="400"> 
 
 <img src="Lattice.png " width="550" height="500">
 
@@ -10,9 +10,9 @@
 ### Table of Contents
 
 - [Problem Description](#problem-description)
-- [Software](#software)
-- [Benchmarks](#benchmarks)
-- [Installation](#installation)
+- [Stochastic Lattice Model](#stochastic-lattice-model)
+- [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
+- [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [References](#references)
 - [Author Info](#author-info)
@@ -40,7 +40,7 @@ Since Basset functions grow exponentially with increasing order n, floating poin
 
 ---
 
-## Software
+## Stochastic Lattice Model
 
 We use only open-source software, so our approach is easily accessible to anyone with a laptop or desktop computer.
 
@@ -55,7 +55,7 @@ We use only open-source software, so our approach is easily accessible to anyone
 
 ---
 
-## Benchmarks
+## Subvolume Kinetic Monte Carlo
 
 #### OMP thread count speed up and efficiency benchmarks
 
@@ -80,7 +80,7 @@ After measuring the accuracy of the finite element method, we compared it with t
 
 ---
 
-## Installation
+## Software And Installation
 
 1. Download github repo. This will contain the necessary make file, bash script, and source code files
 2. Install Arblib library by Frederick Johansson (version 2.17 or newer). You can build from source [1] or download as a package through anaconda3.
