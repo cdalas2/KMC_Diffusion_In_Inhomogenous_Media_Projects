@@ -3,7 +3,7 @@
 
 <img src="Lattice.png " width="550" height="500">
 
-> A numerical boundary value method (BVM) for protein-induced bilayer deformation calculations
+> A kinetic monte carlo (KMC) method for predicting the trajectories of emerin monomer protein in heterogeneous media
 
 ---
 
