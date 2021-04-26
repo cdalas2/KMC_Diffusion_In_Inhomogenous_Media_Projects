@@ -1,5 +1,6 @@
 # PHYS516FINAL
-<img src="https://github.com/cdalas2/PHYS516FINAL/blob/main/BilayerAndProteinSurface.pdf"/>
+<object data="https://github.com/cdalas2/PHYS516FINAL/blob/main/BilayerAndProteinSurface.pdf" type="application/pdf" width="100%"> 
+</object>
 
 > A numerical boundary value method (BVM) for protein-induced bilayer deformation calculations
 
