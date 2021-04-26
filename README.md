@@ -1,6 +1,4 @@
 # PHYS516FINAL
-<img src="BilayerAndProteinSurface.png " width="600" height="400"> 
-
 <img src="Lattice.png " width="550" height="500">
 
 > A kinetic monte carlo (KMC) method for predicting the trajectories of freely diffusing particles in heterogeneous media applied to several problems in biophysics
