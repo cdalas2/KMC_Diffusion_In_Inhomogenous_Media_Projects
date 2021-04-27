@@ -20,20 +20,21 @@
 ## Subvolume Kinetic Monte Carlo
 
 We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations for our numerical calculations [2].
+
 #### Simulation steps
 1. Domain patch is divided into *K* lattice cells.
-2. System start state is *M* particles uniformly distributed along all cells; so ***N**=M/K* particles in each cell.
-3. Each lattice cell is assigned a wait time between hops *&tau;*
-4. Calculate transition rates *W(N,&tau;)* of each lattice cell.
-5. Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
-  hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
-5. Sort lattice cells by their event time in a binary min heap.
-6. 1st iteration will occur in the binary tree root node lattice cell of this heap.
-7. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
-8. Update lattice particle occupancy numbers and the transition rates of the lattice cells involved.
-9. Calculate new event times using random numbers for the lattice cells involved.
-10. Re-sort the binary heap if necessary.
-11. Repeat 6-10 for subsequent iterations until desired iteration of time limit is reached.
+2. Lattice Info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
+               Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
+               Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
+               Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
+               hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
+3. Sort lattice cells by their event time in a binary min heap. 
+4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
+5. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
+6. Update lattice info of lattice cells involved in the particle exchange.
+7. Calculate new event times using random numbers for the lattice cells involved.
+8. Re-sort the binary heap if necessary.
+9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
 #### References
 
