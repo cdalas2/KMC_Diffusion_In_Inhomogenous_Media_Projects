@@ -8,8 +8,7 @@
 ### Table of Contents
 
 - [Problem Description](#problems-description)
-- [Stochastic Lattice Model](#stochastic-lattice-model)
-- [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
+- [Stochastic Lattice Model And Subvolume Kinetic Monte Carlo](#stochastic-lattice-model-and-subvolume-kinetic-monte-carlo)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [Other Biophysics Problems](#other-biophysics-problems)
