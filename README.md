@@ -7,9 +7,10 @@
 
 ### Table of Contents
 
-- [Problem Description](#problem-description)
-- [Stochastic Lattice Model And Subvolume Kinetic Monte Carlo](#stochastic-lattice-model-and-subvolume-kinetic-monte-carlo)
-- [Results](#results)
+- [Stochastic Lattice Model](#stochastic-lattice-model)
+- [Emerin Protein Clustering](#emerin-protein-clustering)
+- [Bacteria Trapping And Hopping](#bacteria-trapping-and-hopping)
+- [Bacteria Clustering](#emerin-protein-clustering)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [Other Biophysics Problems](#other-biophysics-problems)
@@ -18,21 +19,10 @@
 
 ---
 
-## Problem Description
-
-#### Emerin proteins
-We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
-<img src="KMC_ProjectNotes.pdf ">
-
-
-[Back To The Top](#PHYS516FINAL)
-
----
-
 ## Stochastic Lattice Model And Subvolume Kinetic Monte Carlo
 
 We use the stochastic lattice model described in the reference paper {CITATION NEEDED HERE}.
-1. Domain patch is divided into K = 1600 cells.
+1. Domain patch is divided into &K; cells.
 2. System start state is M = 1600 particles uniformly distrubed along all cells; so 1 particle in each cell.
 3. Calculate transition rates W(N,&tau;) of each lattice cell.
 4. Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
@@ -49,6 +39,13 @@ We use the stochastic lattice model described in the reference paper {CITATION N
 [Back To The Top](#PHYS516FINAL)
 
 ---
+
+## Emerin Protein Clustering
+
+#### Description
+We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
+<img src="KMC_ProjectNotes.pdf ">
+
 
 ## Results
 <img src="KMC_freeDiffusion.png " width="550" height="400">
