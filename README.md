@@ -9,6 +9,7 @@
 
 - [Problem Description](#problem-description)
 - [Stochastic Lattice Model And Subvolume Kinetic Monte Carlo](#stochastic-lattice-model-and-subvolume-kinetic-monte-carlo)
+- [Results](#results)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [Other Biophysics Problems](#other-biophysics-problems)
@@ -43,6 +44,14 @@ We use the stochastic lattice model described in the reference paper {CITATION N
 9. Calculate new event times for the lattice cells involved.
 10. Re-sort the binary heap if necessary.
 11. Repeat 6-10 for subsequent iteration.
+
+
+[Back To The Top](#PHYS516FINAL)
+
+---
+
+## Results
+<img src="KMC_freeDiffusion.png " width="550" height="500">
 
 
 [Back To The Top](#PHYS516FINAL)
