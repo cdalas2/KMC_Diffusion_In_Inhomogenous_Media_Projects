@@ -8,9 +8,9 @@
 ### Table of Contents
 
 - [Stochastic Lattice Model](#stochastic-lattice-model)
-- [Emerin Protein Clustering](#emerin-protein-clustering)
-- [Bacteria Trapping And Hopping](#bacteria-trapping-and-hopping)
-- [Bacteria Clustering](#emerin-protein-clustering)
+- [1. Emerin Protein Clustering](#emerin-protein-clustering)
+- [2. Bacteria Hopping And Trapping](#bacteria-trapping-and-hopping)
+- [3. Bacteria Clustering](#emerin-protein-clustering)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [Other Biophysics Problems](#other-biophysics-problems)
@@ -19,28 +19,28 @@
 
 ---
 
-## Stochastic Lattice Model And Subvolume Kinetic Monte Carlo
+## Stochastic Lattice Model
 
-We use the stochastic lattice model described in the reference paper {CITATION NEEDED HERE}.
+We use the stochastic lattice model and perform subvolume KMC simulations for our numerical calculation as described in the reference paper {CITATION NEEDED HERE}.
 1. Domain patch is divided into &K; cells.
-2. System start state is M = 1600 particles uniformly distrubed along all cells; so 1 particle in each cell.
+2. System start state is M particles uniformly distributed along all cells; so 1 particle in each cell.
 3. Calculate transition rates W(N,&tau;) of each lattice cell.
 4. Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
   hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
 5. Sort lattice cells by their event time in a binary min heap.
 6. 1st iteration will occur in the binary tree root node lattice cell of this heap.
-7. Randomly pick one the nearest neighbors of this lattice cell, for the particle to hop into.
-8. Update lattice occupancy numbers and the transition rates of the lattice cells involved.
-9. Calculate new event times for the lattice cells involved.
+7. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
+8. Update lattice particle occupancy numbers and the transition rates of the lattice cells involved.
+9. Calculate new event times using random numbers for the lattice cells involved.
 10. Re-sort the binary heap if necessary.
-11. Repeat 6-10 for subsequent iteration.
+11. Repeat 6-10 for subsequent iterations until desired iteration of time limit is reached.
 
 
 [Back To The Top](#PHYS516FINAL)
 
 ---
 
-## Emerin Protein Clustering
+## 1. Emerin Protein Clustering
 
 #### Description
 We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
@@ -50,6 +50,18 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 ## Results
 <img src="KMC_freeDiffusion.png " width="550" height="400">
 
+
+[Back To The Top](#PHYS516FINAL)
+
+---
+
+## 2. Bacteria Hopping And Trapping
+
+[Back To The Top](#PHYS516FINAL)
+
+---
+
+## 3. Bacteria Clustering
 
 [Back To The Top](#PHYS516FINAL)
 
