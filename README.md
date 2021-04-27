@@ -60,7 +60,7 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 
 
 #### Results
-<img src="KMC_freeDiffusion.png " width="550" height="400">
+<img src="Lattice.png " width="550" height="400"><img src="KMC_freeDiffusion.png " width="550" height="400">
 
 #### References
 
