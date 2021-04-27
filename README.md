@@ -20,7 +20,7 @@
 ## Problem Description
 
 #### Emerin proteins
-We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. Our system will consist of M=1600 total monomer emerin proteins. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower (D_{in} = 250 nm^{2}/s) than that outside of it (D_{out} = 3500 nm^{2}/s); the diffusion rate is slower in the nanodomain due to the clustering of emerin proteins there. PROJECT NOTES--->
+We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
 <img src="KMC_ProjectNotes.pdf ">
 
 
