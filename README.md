@@ -32,9 +32,9 @@ It has been observed that some bacteria will cluster to swim faster. Their mobil
 
 ---
 
-## Stochastic Lattice Model
+## Stochastic Lattice Model And Subvolume Kinetic Monte Carlo
 
-We use only open-source software, so our approach is easily accessible to anyone with a laptop or desktop computer.
+We use the stochastic lattice model describe in the reference paper {CITATION NEEDED HERE}. 
 
 - C++
 - Arblib library (version 2.17 or newer)
@@ -47,41 +47,9 @@ We use only open-source software, so our approach is easily accessible to anyone
 
 ---
 
-## Subvolume Kinetic Monte Carlo
-
-#### OMP thread count speed up and efficiency benchmarks
-
-<img src="speedup.png " width="500" height="375"> <img src="efficiency.png " width="500" height="375">
-
-Our plots show performance benchmarks for a truncation length N = 62 and using floating point precision of about 200 decimal places.
-We got almost a 5x speed up using only 8 threads. Efficiency decreases with increased thread count.
-
-#### Boundary value method benchmarked against a hybrid of finite elements and discrete Kirchoff triangles method (FEDKTM)
-The hybrid FEDKTM converges with decreasing average mesh length.
-Using paraview we can create a pipeline to extract the length data of the mesh elements used in the FEDKTM. We average the mesh lengths and plot the FEDKTM calculations as a function of average mesh length. 
-
-<img src="FEM_mesh.png " width="1000" height="600">
-
-<img src="FEM_edges.png " width="1000" height="600">
-
-<img src="FEM_celldata.png " width="1000" height="600">
-
-After measuring the accuracy of the finite element method, we compared it with the converged BVM and found similar agreement to the accuracy of the FEDKTM, which shows the BVM appears to reliably converge to the correct result.
-
-[Back To The Top](#PHYS516FINAL)
-
----
-
 ## Software And Installation
 
-1. Download github repo. This will contain the necessary make file, bash script, and source code files
-2. Install Arblib library by Frederick Johansson (version 2.17 or newer). You can build from source [1] or download as a package through anaconda3.
-3. Install OpenMP.
-4. Install OpenMPI (if you want to do multiple protein runs).
-5. Replace paths in make file to arblib library and header files.
-6. Replace paths in bash script to arblib library and Carlos_membrane_project source files.
-7. Replace paths in main source code file for the location of where the data output is to be saved.
-8. Adjust OMP_NUM_THREADS environmental variable to the thread count wanted in the bash script.
+1. Download github repo. This will contain the necessary make file and source code files for code compilation of C code.
 
 [Back To The Top](#PHYS516FINAL)
 
@@ -89,11 +57,11 @@ After measuring the accuracy of the finite element method, we compared it with t
 
 ## How To Compile And Run It
 
-On a terminal one can compile a simulation by a make file provided. Then one can run the simulation by a bash script provided. Terminal/command lines are:
+On a terminal one can compile a simulation by a make file provided. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal or command prompt. In practice, we redirect the output to an output file to save the data run.
 
 $ make
 
-$ bash run_deformation.sl
+$ ./KMC > KMC.out
 
 [Back To The Top](#PHYS516FINAL)
 
@@ -101,7 +69,7 @@ $ bash run_deformation.sl
 
 ## References
 
-1. My manuscript (work in progress)
+1. Notes on Emerin Protein Diffusion
 
 2. F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
 
