@@ -51,7 +51,7 @@ We use the stochastic lattice model described in the reference paper {CITATION N
 ---
 
 ## Results
-<img src="KMC_freeDiffusion.png " width="550" height="500">
+<img src="KMC_freeDiffusion.png " width="550" height="400">
 
 
 [Back To The Top](#PHYS516FINAL)
