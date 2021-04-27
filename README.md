@@ -56,9 +56,9 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 
 #### References
 
-1. Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
+[1] Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
 
-2. F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
+[2] F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
 
 
 [Back To The Top](#PHYS516FINAL)
@@ -75,13 +75,13 @@ IN PROGRESS
 
 #### References
 
-1. Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
+[1] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
-2. Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
+[2] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
 
-3. https://www.youtube.com/watch?v=JaxT-rZpte0
+[3] https://www.youtube.com/watch?v=JaxT-rZpte0
 
-4. https://www.youtube.com/watch?v=pjoojqw877A
+[4] https://www.youtube.com/watch?v=pjoojqw877A
 
 
 [Back To The Top](#PHYS516FINAL)
@@ -98,9 +98,9 @@ NEED MORE BACKGROUND RESEARCH
 
 #### References
 
-1. Notes on Emerin Protein Diffusion
+[1] Notes on Emerin Protein Diffusion
 
-2. F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
+[2] F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
 
 
 [Back To The Top](#PHYS516FINAL)
