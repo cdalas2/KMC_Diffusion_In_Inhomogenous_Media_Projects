@@ -7,7 +7,7 @@
 
 ### Table of Contents
 
-- [Stochastic Lattice Model](#stochastic-lattice-model)
+- [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
 - [1. Protein Clustering](#1-protein-clustering)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
 - [3. Bacteria Clustering](#3-bacteria-clustering)
@@ -18,7 +18,7 @@
 
 ---
 
-## Stochastic Lattice Model
+## Subvolume Kinetic Monte Carlo
 
 We use the stochastic lattice model and perform subvolume KMC simulations for our numerical calculation as described in the reference paper {CITATION NEEDED HERE}.
 1. Domain patch is divided into &K; cells.
