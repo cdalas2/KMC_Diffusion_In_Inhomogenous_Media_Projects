@@ -34,7 +34,20 @@ It has been observed that some bacteria will cluster to swim faster. Their mobil
 
 ## Stochastic Lattice Model And Subvolume Kinetic Monte Carlo
 
-We use the stochastic lattice model describe in the reference paper {CITATION NEEDED HERE}. 
+We use the stochastic lattice model described in the reference paper {CITATION NEEDED HERE}.
+1. Domain patch is divided into K = 1600 cells.
+2. System start state is M = 1600 particles uniformly distrubed along all cells; so 1 particle in each cell.
+3. Calculate transition rates W(N,\tau) of each lattice cell.
+4. Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
+  hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
+5. Sort lattice cells by their event time in a binary min heap.
+6. 1st iteration will occur in the binary tree root node lattice cell of this heap.
+7. Randomly pick one the nearest neighbors of this lattice cell, for the particle to hop into.
+8. Update lattice occupancy numbers and the transition rates of the lattice cells involved.
+9. Calculate new event times for the lattice cells involved.
+10. Re-sort the binary heap if necessary.
+11. Repeat 6-10 for subsequent iteration.
+
 
 [Back To The Top](#PHYS516FINAL)
 
