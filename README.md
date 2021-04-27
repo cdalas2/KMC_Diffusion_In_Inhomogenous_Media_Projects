@@ -7,7 +7,7 @@
 
 ### Table of Contents
 
-- [Problem Description](#problem-description)
+- [Problems In Biophysics](#problems-in-biophysics)
 - [Stochastic Lattice Model](#stochastic-lattice-model)
 - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
 - [Software And Installation](#software-and-installation)
@@ -17,7 +17,7 @@
 
 ---
 
-## Problem Descriptions
+## Problems In Biophysics
 
 #### 1) Emerin proteins
 We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. Our system will consist of M=1600 total monomer emerin proteins. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower (D_{in} = 250 nm^{2}/s) than that outside of it (D_{out} = 3500 nm^{2}/s); the diffusion rate is slower in the nanodomain due to the clustering of emerin proteins there. 
@@ -122,6 +122,5 @@ $ bash run_deformation.sl
 
 - LinkedIn - [Carlos Alas LI](https://www.linkedin.com/in/carlos-alas-6a4643160/)
 - ResearchGate - [Carlos Alas RG](https://www.researchgate.net/profile/Carlos_Alas3)
-This project was brought to life by Carlos D. Alas under the supervision of Christoph A. Haselwandter
 
 [Back To The Top](#PHYS516FINAL)
