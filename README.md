@@ -34,7 +34,7 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 We use the stochastic lattice model described in the reference paper {CITATION NEEDED HERE}.
 1. Domain patch is divided into K = 1600 cells.
 2. System start state is M = 1600 particles uniformly distrubed along all cells; so 1 particle in each cell.
-3. Calculate transition rates W(N,\tau) of each lattice cell.
+3. Calculate transition rates W(N,&tau) of each lattice cell.
 4. Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
   hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
 5. Sort lattice cells by their event time in a binary min heap.
