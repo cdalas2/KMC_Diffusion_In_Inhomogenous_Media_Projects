@@ -8,9 +8,9 @@
 ### Table of Contents
 
 - [Stochastic Lattice Model](#stochastic-lattice-model)
-- [1. Emerin Protein Clustering](#emerin-protein-clustering)
-- [2. Bacteria Hopping And Trapping](#bacteria-trapping-and-hopping)
-- [3. Bacteria Clustering](#emerin-protein-clustering)
+- [1. Emerin Protein Clustering](#1.-emerin-protein-clustering)
+- [2. Bacteria Hopping And Trapping](#2.-bacteria-hopping-and-trapping)
+- [3. Bacteria Clustering](#3.-emerin-protein-clustering)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [References](#references)
