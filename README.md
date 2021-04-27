@@ -7,7 +7,7 @@
 
 ### Table of Contents
 
-- [Problem Description](#problems-description)
+- [Problem Description](#problem-description)
 - [Stochastic Lattice Model And Subvolume Kinetic Monte Carlo](#stochastic-lattice-model-and-subvolume-kinetic-monte-carlo)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
