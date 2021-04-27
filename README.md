@@ -19,7 +19,8 @@
 
 ## Subvolume Kinetic Monte Carlo
 
-We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations for our numerical calculation as described in the reference paper {CITATION NEEDED HERE}.
+We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations for our numerical calculations [2].
+#### Simulation steps
 1. Domain patch is divided into &K; cells.
 2. System start state is M particles uniformly distributed along all cells; so 1 particle in each cell.
 3. Calculate transition rates W(N,&tau;) of each lattice cell.
