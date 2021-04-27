@@ -13,8 +13,7 @@
 - [3. Bacteria Clustering](#3-bacteria-clustering)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
-- [References](#references)
-- [Author Info](#author-info)
+- [Authors Info](#authors-info)
 
 ---
 
@@ -46,8 +45,22 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 <img src="KMC_ProjectNotes.pdf ">
 
 
-## Results
+#### Results
 <img src="KMC_freeDiffusion.png " width="550" height="400">
+
+#### References
+
+1. Notes on Emerin Protein Diffusion
+
+2. F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
+
+3. Leonardo Dagum and Ramesh Menon. Openmp: an industry standard api for shared-memory programming. Computational Science & Engineering, IEEE, 5(1):46-55, 1998.
+
+4. openMPI (citation needed here)
+
+5. Osman Kahraman, Peter D. Koch, William S. Klug, and Christoph A. Haselwandter. Architecture and function of mechanosensitive membrane protein lattices.              Scientific Reports, 6(1), Jan 2016.
+
+6. Ayachit, Utkarsh, The ParaView Guide: A Parallel Visualization Application, Kitware, 2015, ISBN 978-1930934306
 
 
 [Back To The Top](#PHYS516FINAL)
@@ -59,6 +72,23 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 #### Description
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. Sometimes these bacteria can encounter media that limits their mobility, such as when traveling across a porous surface or into a fluid domain of a different viscosity. When the bacteria is in a pore it is described as being trapped. When the bacteria finds a way out of the pore it swims freely until it becomes trapped again and this is termed as hopping. We can model the pores as individual microdomains and apply periodic boundary conditions to determine its diffusive rate through the domain patch. Using this diffusion rate we can model bacteria swimming over longer length scales where they encounter a microdomain of several pores within which they have this diffusion rate.
 
+#### Results
+<img src="KMC_freeDiffusion.png " width="550" height="400">
+
+#### References
+
+1. Notes on Emerin Protein Diffusion
+
+2. F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
+
+3. Leonardo Dagum and Ramesh Menon. Openmp: an industry standard api for shared-memory programming. Computational Science & Engineering, IEEE, 5(1):46-55, 1998.
+
+4. openMPI (citation needed here)
+
+5. Osman Kahraman, Peter D. Koch, William S. Klug, and Christoph A. Haselwandter. Architecture and function of mechanosensitive membrane protein lattices.              Scientific Reports, 6(1), Jan 2016.
+
+6. Ayachit, Utkarsh, The ParaView Guide: A Parallel Visualization Application, Kitware, 2015, ISBN 978-1930934306
+
 [Back To The Top](#PHYS516FINAL)
 
 ---
@@ -67,6 +97,23 @@ Many bacteria swim in the form of a random walk in order to sample an area and b
 
 #### Description
 It has been observed that some bacteria will cluster to swim faster. Their mobility relative to the cluster would be limited due to the presence of the other bacteria and so the hopping rates in the cluster would be slower, but the microdomain of the cluster would be translating with time and so we would need to alter the subvolume KMC method to account for this and we could also consider allowing for the size and shape of the nanodomain to change depending on lattice occupancy.
+
+#### Results
+<img src="KMC_freeDiffusion.png " width="550" height="400">
+
+#### References
+
+1. Notes on Emerin Protein Diffusion
+
+2. F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
+
+3. Leonardo Dagum and Ramesh Menon. Openmp: an industry standard api for shared-memory programming. Computational Science & Engineering, IEEE, 5(1):46-55, 1998.
+
+4. openMPI (citation needed here)
+
+5. Osman Kahraman, Peter D. Koch, William S. Klug, and Christoph A. Haselwandter. Architecture and function of mechanosensitive membrane protein lattices.              Scientific Reports, 6(1), Jan 2016.
+
+6. Ayachit, Utkarsh, The ParaView Guide: A Parallel Visualization Application, Kitware, 2015, ISBN 978-1930934306
 
 [Back To The Top](#PHYS516FINAL)
 
@@ -92,26 +139,7 @@ $ ./KMC > KMC.out
 
 ---
 
-## References
-
-1. Notes on Emerin Protein Diffusion
-
-2. F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
-
-3. Leonardo Dagum and Ramesh Menon. Openmp: an industry standard api for shared-memory programming. Computational Science & Engineering, IEEE, 5(1):46-55, 1998.
-
-4. openMPI (citation needed here)
-
-5. Osman Kahraman, Peter D. Koch, William S. Klug, and Christoph A. Haselwandter. Architecture and function of mechanosensitive membrane protein lattices.              Scientific Reports, 6(1), Jan 2016.
-
-6. Ayachit, Utkarsh, The ParaView Guide: A Parallel Visualization Application, Kitware, 2015, ISBN 978-1930934306
-
-
-[Back To The Top](#PHYS516FINAL)
-
----
-
-## Author Info
+## Authors Info
 
 - LinkedIn - [Carlos Alas LI](https://www.linkedin.com/in/carlos-alas-6a4643160/)
 - ResearchGate - [Carlos Alas RG](https://www.researchgate.net/profile/Carlos_Alas3)
