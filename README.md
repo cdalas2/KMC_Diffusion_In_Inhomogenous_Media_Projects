@@ -36,13 +36,6 @@ It has been observed that some bacteria will cluster to swim faster. Their mobil
 
 We use the stochastic lattice model describe in the reference paper {CITATION NEEDED HERE}. 
 
-- C++
-- Arblib library (version 2.17 or newer)
-- Carlos_Membrane_Project
-- OpenMP
-- OpenMPI (if you want to do calculations for multiple protein systems)
-- Paraview
-
 [Back To The Top](#PHYS516FINAL)
 
 ---
