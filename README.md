@@ -13,7 +13,6 @@
 - [3. Bacteria Clustering](#emerin-protein-clustering)
 - [Software And Installation](#software-and-installation)
 - [How To Compile And Run It](#how-to-compile-and-run-it)
-- [Other Biophysics Problems](#other-biophysics-problems)
 - [References](#references)
 - [Author Info](#author-info)
 
