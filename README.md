@@ -121,7 +121,7 @@ It has been observed that some bacteria will cluster to swim faster. Their mobil
 
 ## Software And Installation
 
-Download github repo. This will contain the necessary make file and source code files for code compilation of C code.
+Download github repo. This will contain the necessary make file and source code files for build and compilation of C code.
 
 [Back To The Top](#PHYS516FINAL)
 
