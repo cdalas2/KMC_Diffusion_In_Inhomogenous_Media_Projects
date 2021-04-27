@@ -17,22 +17,16 @@
 
 ---
 
-## Problem Description
+## Problem Descriptions
 
-#### Physical problem
+#### 1) Emerin proteins
+We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. Our system will consist of M=1600 total monomer emerin proteins. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower (D_{in} = 250 nm^{2}/s) than that outside of it (D_{out} = 3500 nm^{2}/s); the diffusion rate is slower in the nanodomain due to the clustering of emerin proteins there. 
 
-We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface with spacial varying diffusion rates. Our system will consist of M=1600 total monomer emerin proteins. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower (D_{in} = 250 nm^{2}/s) than that outside of it (D_{out} = 3500 nm^{2}/s); the diffusion rate is slower in the nanodomain due to the clustering of emerin proteins there. 
+#### 2) Bacteria hopping and trapping
+Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. Sometimes these bacteria can encounter media that limits their mobility, such as when traveling across a porous surface or into a fluid domain of a different viscosity. When the bacteria is in a pore it is described as being trapped. When the bacteria finds a way out of the pore it swims freely until it becomes trapped again and this is termed as hopping. We can model the pores as individual microdomains and apply periodic boundary conditions to determine its diffusive rate through the domain patch. Using this diffusion rate we can model bacteria swimming over longer length scales where they encounter a microdomain of several pores within which they have this diffusion rate.
 
-#### Framing of the problem in mathematics 
-
-<img src="equations.png " width="1500" height="250">
-
-We truncation the infinite series that represents the general form of the bilayer deformation field to a finite number of terms, N, and applying the boundary conditions along the protein-bilayer interface to form a linear system of boundary equations which can be solved for the coefficients A_n,B_n, where n = 0,1,2,...,N. Protein shape data can be obtained through either experimental measurements or molecular dynamics simulations. Since the late 1990's many protein structures have been highly resolved through x-ray crystallography. Many of these structures are catalogued in the Protein Data Bank (PDB) website https://www.rcsb.org. Adaptive point distributions are needed for accelerated convergence for many protein shapes of experimental and theoretical interest, which will be discussed in our manuscript.
-
-
-#### Computational obstacles and remedy
-
-Since Basset functions grow exponentially with increasing order n, floating point overflow issues and matrix conditioning issues manifest. We use Arblib library for arbitrary precision floating point calculations, choosing an appropriate precision to avoid overflow and to offset numerical instability when solving the linear system of boundary equations. Numerical algorithms to solve the linear system of boundary conditions that minimize adding anymore instability to the problem, as well as being parallelizable, are discussed in the manuscript.
+#### 3) Bacteria Clustering
+It has been observed that some bacteria will cluster to swim faster. Their mobility relative to the cluster would be limited due to the presence of the other bacteria and so the hopping rates in the cluster would be slower, but the microdomain of the cluster would be translating with time and so we would need to alter the subvolume KMC method to account for this and we could also consider allowing for the size and shape of the nanodomain to change depending on lattice occupancy.
 
 [Back To The Top](#PHYS516FINAL)
 
