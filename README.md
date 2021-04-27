@@ -19,7 +19,7 @@
 
 ## Subvolume Kinetic Monte Carlo
 
-We use the stochastic lattice model and perform subvolume KMC simulations for our numerical calculation as described in the reference paper {CITATION NEEDED HERE}.
+We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations for our numerical calculation as described in the reference paper {CITATION NEEDED HERE}.
 1. Domain patch is divided into &K; cells.
 2. System start state is M particles uniformly distributed along all cells; so 1 particle in each cell.
 3. Calculate transition rates W(N,&tau;) of each lattice cell.
@@ -35,9 +35,9 @@ We use the stochastic lattice model and perform subvolume KMC simulations for ou
 
 #### References
 
-1. Li, Y., Kahraman, O., & Haselwandter, C. A. (2017). Distribution of randomly diffusing particles in inhomogeneous media. Physical Review E, 96(3). https://doi.org/10.1103/physreve.96.032139
+[1] Li, Y., Kahraman, O., & Haselwandter, C. A. (2017). Distribution of randomly diffusing particles in inhomogeneous media. Physical Review E, 96(3). https://doi.org/10.1103/physreve.96.032139
 
-2. Elf, J., Doncic, A., & Ehrenberg, M. (2003). Mesoscopic reaction-diffusion in intracellular signaling. In S. M. Bezrukov, H. Frauenfelder, & F. Moss (Eds.), Fluctuations and Noise in Biological, Biophysical, and Biomedical Systems. SPIE. https://doi.org/10.1117/12.497009
+[2] Elf, J., Doncic, A., & Ehrenberg, M. (2003). Mesoscopic reaction-diffusion in intracellular signaling. In S. M. Bezrukov, H. Frauenfelder, & F. Moss (Eds.), Fluctuations and Noise in Biological, Biophysical, and Biomedical Systems. SPIE. https://doi.org/10.1117/12.497009
 
 
 [Back To The Top](#PHYS516FINAL)
