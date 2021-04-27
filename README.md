@@ -42,7 +42,7 @@ We use the stochastic lattice model describe in the reference paper {CITATION NE
 
 ## Software And Installation
 
-1. Download github repo. This will contain the necessary make file and source code files for code compilation of C code.
+Download github repo. This will contain the necessary make file and source code files for code compilation of C code.
 
 [Back To The Top](#PHYS516FINAL)
 
