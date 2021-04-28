@@ -96,8 +96,6 @@ NEED MORE BACKGROUND RESEARCH
 #### References
 [1] Notes on Emerin Protein Diffusion
 
-[2] F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
-
 
 [Back To The Top](#PHYS516FINAL)
 
@@ -105,6 +103,7 @@ NEED MORE BACKGROUND RESEARCH
 
 ## Software And Installation
 Download github repo. This will contain the necessary make file and source code files for build and compilation of C code.
+
 
 [Back To The Top](#PHYS516FINAL)
 
@@ -117,6 +116,7 @@ $ make
 
 $ ./KMC > KMC.out
 
+
 [Back To The Top](#PHYS516FINAL)
 
 ---
@@ -125,5 +125,6 @@ $ ./KMC > KMC.out
 - LinkedIn - [Carlos Alas LI](https://www.linkedin.com/in/carlos-alas-6a4643160/)
 - ResearchGate - [Carlos Alas RG](https://www.researchgate.net/profile/Carlos_Alas3)
 - Trinh Lan Hoa
+
 
 [Back To The Top](#PHYS516FINAL)
