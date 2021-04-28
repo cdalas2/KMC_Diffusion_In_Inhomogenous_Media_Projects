@@ -75,9 +75,11 @@ IN PROGRESS
 
 [2] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
 
-[3] https://www.youtube.com/watch?v=JaxT-rZpte0
+[3] Bhattacharjee, T., Amchin, D. B., Ott, J. A., Kratz, F., & Datta, S. S. (2020). Chemotactic Migration of Bacteria in Porous Media. Cold Spring Harbor Laboratory. https://doi.org/10.1101/2020.08.10.244731
 
-[4] https://www.youtube.com/watch?v=pjoojqw877A
+[4] https://www.youtube.com/watch?v=JaxT-rZpte0
+
+[5] https://www.youtube.com/watch?v=pjoojqw877A
 
 
 [Back To The Top](#PHYS516FINAL)
