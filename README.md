@@ -75,7 +75,7 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 
 
 #### Results
-<img src="Lattice.png " width="425" height="275"><img src="KMC_freeDiffusion.png " width="525" height="375">
+<img src="Lattice.png " width="425" height="375"><img src="KMC_freeDiffusion.png " width="525" height="375">
 
 #### References
 [3] Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
