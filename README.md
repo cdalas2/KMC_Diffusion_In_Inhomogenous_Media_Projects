@@ -6,7 +6,6 @@
 ---
 
 ### Table of Contents
-
 - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
 - [1. Protein Clustering](#1-protein-clustering)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
@@ -18,7 +17,6 @@
 ---
 
 ## Subvolume Kinetic Monte Carlo
-
 We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerine monomer protein concentration trapped in the nanodomain with time in the steady state of the system.
 
 #### Simulation steps
@@ -37,7 +35,6 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
 #### References
-
 [1] Li, Y., Kahraman, O., & Haselwandter, C. A. (2017). Distribution of randomly diffusing particles in inhomogeneous media. Physical Review E, 96(3). https://doi.org/10.1103/physreve.96.032139
 
 [2] Elf, J., Doncic, A., & Ehrenberg, M. (2003). Mesoscopic reaction-diffusion in intracellular signaling. In S. M. Bezrukov, H. Frauenfelder, & F. Moss (Eds.), Fluctuations and Noise in Biological, Biophysical, and Biomedical Systems. SPIE. https://doi.org/10.1117/12.497009
@@ -48,7 +45,6 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 ---
 
 ## 1. Protein Clustering
-
 #### Description
 We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
 <img src="KMC_ProjectNotes.pdf ">
@@ -58,7 +54,6 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 <img src="Lattice.png " width="450" height="400"><img src="KMC_freeDiffusion.png " width="550" height="400">
 
 #### References
-
 [1] Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
 
 [2] F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
@@ -69,7 +64,6 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 ---
 
 ## 2. Bacteria Hopping And Trapping
-
 #### Description
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. Sometimes these bacteria can encounter media that limits their mobility, such as when traveling across a porous surface or into a fluid domain of a different viscosity. When the bacteria is in a pore it is described as being trapped. When the bacteria finds a way out of the pore it swims freely until it becomes trapped again and this is termed as hopping. We can model the pores as individual microdomains and apply periodic boundary conditions to determine its diffusive rate through the domain patch. Using this diffusion rate we can model bacteria swimming over longer length scales where they encounter a microdomain of several pores within which they have this diffusion rate.
 
@@ -77,7 +71,6 @@ Many bacteria swim in the form of a random walk in order to sample an area and b
 IN PROGRESS
 
 #### References
-
 [1] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
 [2] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
@@ -92,7 +85,6 @@ IN PROGRESS
 ---
 
 ## 3. Bacteria Clustering
-
 #### Description
 It has been observed that some bacteria will cluster to swim faster. Their mobility relative to the cluster would be limited due to the presence of the other bacteria and so the hopping rates in the cluster would be slower, but the microdomain of the cluster would be translating with time and so we would need to alter the subvolume KMC method to account for this and we could also consider allowing for the size and shape of the nanodomain to change depending on lattice occupancy.
 
@@ -100,7 +92,6 @@ It has been observed that some bacteria will cluster to swim faster. Their mobil
 NEED MORE BACKGROUND RESEARCH
 
 #### References
-
 [1] Notes on Emerin Protein Diffusion
 
 [2] F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
@@ -111,7 +102,6 @@ NEED MORE BACKGROUND RESEARCH
 ---
 
 ## Software And Installation
-
 Download github repo. This will contain the necessary make file and source code files for build and compilation of C code.
 
 [Back To The Top](#PHYS516FINAL)
@@ -119,7 +109,6 @@ Download github repo. This will contain the necessary make file and source code 
 ---
 
 ## How To Compile And Run It
-
 On a terminal one can compile a simulation by a make file provided. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal or command prompt. In practice, we redirect the output to an output file to save the data run.
 
 $ make
@@ -131,7 +120,6 @@ $ ./KMC > KMC.out
 ---
 
 ## Authors Info
-
 - LinkedIn - [Carlos Alas LI](https://www.linkedin.com/in/carlos-alas-6a4643160/)
 - ResearchGate - [Carlos Alas RG](https://www.researchgate.net/profile/Carlos_Alas3)
 - Trinh Lan Hoa
