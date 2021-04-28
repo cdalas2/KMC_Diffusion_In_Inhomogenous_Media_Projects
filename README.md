@@ -1,7 +1,7 @@
 # PHYS516FINAL
 <img src="InhomogeneousSchematic.png " width="600" height="400">
 
-> Applying a kinetic monte carlo (KMC) method, for predicting the trajectories of freely diffusing particles in heterogeneous media [1,2], to investigate several problems in biophysics.
+> Applying a kinetic monte carlo (KMC) method, for predicting the trajectories of freely diffusing particles in heterogeneous media [1,2], to investigate several problems in biophysics. This image was borrowed from reference [1].
 
 ---
 
