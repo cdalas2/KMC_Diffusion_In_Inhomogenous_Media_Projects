@@ -112,7 +112,7 @@ Download github repo. This will contain the necessary make file and source code 
 ---
 
 ## How To Compile And Run It
-On a terminal one can compile the source code file KMC.c by a make file provided to run a simulation. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal. In practice, we redirect the output to an output file to save the data run.
+On a terminal one can compile the source code file KMC.c by a make file provided to run a simulation. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal. In practice, we redirect the output to an output file to save the data run which can then be plotted in an external plotter. We used MATLAB to plot the lattice cell schematic, the data run, and to edit the plot aesthetically.
 
 $ make
 
