@@ -11,7 +11,7 @@
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [1. Protein Clustering](#1-protein-clustering)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
-- [3. Bacteria Clustering](#3-bacteria-clustering)
+- [3. How Did The Bacteria Cross The Bacteria Highway?](#3-how-did-the-bacteria-cross-the-bacteria-highway?)
 - [Authors Info](#authors-info)
 
 ---
@@ -108,16 +108,15 @@ IN PROGRESS
 
 ---
 
-## 3. Bacteria Clustering
+## 3. How Did The Bacteria Cross The Bacteria Highway?
 #### Description
-It has been observed that some bacteria will cluster to swim faster. Their mobility relative to the cluster would be limited due to the presence of the other bacteria and so the hopping rates in the cluster would be slower, but the microdomain of the cluster would be translating with time and so we would need to alter the subvolume KMC method to account for this and we could also consider allowing for the size, shape, or speed of the nanodomain to change depending on lattice occupancy.
+It has been observed that some bacteria will cluster to swim faster. We can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again.
 
 #### Results
 NEED MORE BACKGROUND RESEARCH
 
 #### References
-[1] Notes on Emerin Protein Diffusion
-
+NEED MORE BACKGROUND RESEARCH
 
 [Back To The Top](#PHYS516FINAL)
 
