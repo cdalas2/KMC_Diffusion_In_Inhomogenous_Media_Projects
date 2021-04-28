@@ -100,6 +100,10 @@ NEED MORE BACKGROUND RESEARCH
 ---
 
 ## Software And Installation
+#### Software
+The source code file KMC.c is written in C. There is a header file minHeap.h with heap functions used in KMC.c.
+
+#### Installation
 Download github repo. This will contain the necessary make file and source code files for build and compilation of C code.
 
 
