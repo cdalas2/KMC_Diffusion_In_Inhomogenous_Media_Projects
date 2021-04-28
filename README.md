@@ -19,7 +19,7 @@
 
 ## Subvolume Kinetic Monte Carlo
 
-We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations for our numerical calculations [2].
+We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerine monomer protein concentration trapped in the nanodomain with time in the steady state of the system.
 
 #### Simulation steps
 1. Domain patch is divided into *K* lattice cells.
