@@ -7,11 +7,11 @@
 
 ### Table of Contents
 - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
+- [Software And Installation](#software-and-installation)
+- [How To Compile And Run It](#how-to-compile-and-run-it)
 - [1. Protein Clustering](#1-protein-clustering)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
 - [3. Bacteria Clustering](#3-bacteria-clustering)
-- [Software And Installation](#software-and-installation)
-- [How To Compile And Run It](#how-to-compile-and-run-it)
 - [Authors Info](#authors-info)
 
 ---
@@ -38,6 +38,30 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 [1] Li, Y., Kahraman, O., & Haselwandter, C. A. (2017). Distribution of randomly diffusing particles in inhomogeneous media. Physical Review E, 96(3). https://doi.org/10.1103/physreve.96.032139
 
 [2] Elf, J., Doncic, A., & Ehrenberg, M. (2003). Mesoscopic reaction-diffusion in intracellular signaling. In S. M. Bezrukov, H. Frauenfelder, & F. Moss (Eds.), Fluctuations and Noise in Biological, Biophysical, and Biomedical Systems. SPIE. https://doi.org/10.1117/12.497009
+
+
+[Back To The Top](#PHYS516FINAL)
+
+---
+
+## Software And Installation
+#### Software
+The source code file KMC.c is written in C. There is a header file minHeap.h with heap functions used in KMC.c.
+
+#### Installation
+Download github repo. This will contain the necessary make file and source code files for build and compilation of the C code.
+
+
+[Back To The Top](#PHYS516FINAL)
+
+---
+
+## How To Compile And Run It
+On a terminal one can compile the source code file KMC.c by a make file provided to run a simulation. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal. In practice, we redirect the output to an output file KMC.out to save the data run which can then be plotted in an external plotter. We used MATLAB to plot the lattice cell schematic, the data run, and to edit the plot aesthetically. Our MATLAB mfile for reading in the data and plotting is included in the repository.
+
+$ make
+
+$ ./KMC > KMC.out
 
 
 [Back To The Top](#PHYS516FINAL)
@@ -93,30 +117,6 @@ NEED MORE BACKGROUND RESEARCH
 
 #### References
 [1] Notes on Emerin Protein Diffusion
-
-
-[Back To The Top](#PHYS516FINAL)
-
----
-
-## Software And Installation
-#### Software
-The source code file KMC.c is written in C. There is a header file minHeap.h with heap functions used in KMC.c.
-
-#### Installation
-Download github repo. This will contain the necessary make file and source code files for build and compilation of the C code.
-
-
-[Back To The Top](#PHYS516FINAL)
-
----
-
-## How To Compile And Run It
-On a terminal one can compile the source code file KMC.c by a make file provided to run a simulation. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal. In practice, we redirect the output to an output file KMC.out to save the data run which can then be plotted in an external plotter. We used MATLAB to plot the lattice cell schematic, the data run, and to edit the plot aesthetically. Our MATLAB mfile for reading in the data and plotting is included in the repository.
-
-$ make
-
-$ ./KMC > KMC.out
 
 
 [Back To The Top](#PHYS516FINAL)
