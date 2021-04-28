@@ -1,7 +1,7 @@
 # PHYS516FINAL
 <img src="InhomogeneousSchematic.png " width="600" height="400">
 
-> A kinetic monte carlo (KMC) method for predicting the trajectories of freely diffusing particles in heterogeneous media applied to several problems in biophysics
+> Applying a kinetic monte carlo (KMC) method, for predicting the trajectories of freely diffusing particles in heterogeneous media [1,2], to investigate several problems in biophysics.
 
 ---
 
@@ -54,9 +54,7 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 <img src="Lattice.png " width="450" height="400"><img src="KMC_freeDiffusion.png " width="550" height="400">
 
 #### References
-[1] Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
-
-[2] F. Johansson. Arb: efficient arbitrary-precision midpoint-radius interval arithmetic. IEEE Transactions on Computers, 66:1281-1292, 2017.
+[3] Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
 
 
 [Back To The Top](#PHYS516FINAL)
@@ -71,15 +69,15 @@ Many bacteria swim in the form of a random walk in order to sample an area and b
 IN PROGRESS
 
 #### References
-[1] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
+[4] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
-[2] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
+[5] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
 
-[3] Bhattacharjee, T., Amchin, D. B., Ott, J. A., Kratz, F., & Datta, S. S. (2020). Chemotactic Migration of Bacteria in Porous Media. Cold Spring Harbor Laboratory. https://doi.org/10.1101/2020.08.10.244731
+[6] Bhattacharjee, T., Amchin, D. B., Ott, J. A., Kratz, F., & Datta, S. S. (2020). Chemotactic Migration of Bacteria in Porous Media. Cold Spring Harbor Laboratory. https://doi.org/10.1101/2020.08.10.244731
 
-[4] https://www.youtube.com/watch?v=JaxT-rZpte0
+[7] https://www.youtube.com/watch?v=JaxT-rZpte0
 
-[5] https://www.youtube.com/watch?v=pjoojqw877A
+[8] https://www.youtube.com/watch?v=pjoojqw877A
 
 
 [Back To The Top](#PHYS516FINAL)
@@ -110,7 +108,7 @@ Download github repo. This will contain the necessary make file and source code 
 ---
 
 ## How To Compile And Run It
-On a terminal one can compile a simulation by a make file provided. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal or command prompt. In practice, we redirect the output to an output file to save the data run.
+On a terminal one can compile the source code file KMC.c by a make file provided to run a simulation. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal. In practice, we redirect the output to an output file to save the data run.
 
 $ make
 
