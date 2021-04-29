@@ -11,7 +11,7 @@
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [1. Protein Clustering](#1-protein-clustering)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
-- [3. How Did The Bacteria Cross The Road?](#3-how-did-the-bacteria-cross-the-road-?)
+- [3. How Did The Bacteria Cross The Road?](#3-how-did-the-bacteria-cross-the-road)
 - [Authors Info](#authors-info)
 
 ---
