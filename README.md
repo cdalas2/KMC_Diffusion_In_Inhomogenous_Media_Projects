@@ -11,7 +11,7 @@
 - [How To Compile And Run It](#how-to-compile-and-run-it)
 - [1. Protein Clustering](#1-protein-clustering)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
-- [3. How Did The Bacteria Cross The Road?](#3-how-did-the-bacteria-cross-the-road?)
+- [3. How Did The Bacteria Cross The Road?](#3-how-did-the-bacteria-cross-the-road)
 - [Authors Info](#authors-info)
 
 ---
@@ -75,7 +75,7 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 
 
 #### Results
-<img src="Lattice.png " width="450" height="400"><img src="KMC_freeDiffusion.png " width="550" height="400">
+<img src="Lattice.png " width="425" height="375"><img src="KMC_freeDiffusion.png " width="525" height="375">
 
 #### References
 [3] Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
