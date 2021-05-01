@@ -6,12 +6,12 @@
 ---
 
 ### Table of Contents
-- [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
-- [Software And Installation](#software-and-installation)
-- [How To Compile And Run It](#how-to-compile-and-run-it)
 - [1. Protein Clustering](#1-protein-clustering)
+- - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
 - [3. How Did The Bacteria Cross The Road?](#3-how-did-the-bacteria-cross-the-road)
+- [Software And Installation](#software-and-installation)
+- [How To Compile And Run It](#how-to-compile-and-run-it)
 - [Authors Info](#authors-info)
 
 ---
