@@ -16,63 +16,6 @@
 
 ---
 
-## Subvolume Kinetic Monte Carlo
-We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerine monomer protein concentration trapped in the nanodomain with time in the steady state of the system.
-
-#### Simulation steps
-1. Domain patch is divided into *K* lattice cells.
-2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
-                        Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
-                        Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
-                        hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
-3. Sort lattice cells by their event time in a binary min heap. 
-4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
-5. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
-6. Update lattice info of lattice cells involved in the particle exchange.
-7. Calculate new event times using random numbers for the lattice cells involved.
-8. Re-sort the binary heap if necessary.
-9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
-
-#### References
-[1] Li, Y., Kahraman, O., & Haselwandter, C. A. (2017). Distribution of randomly diffusing particles in inhomogeneous media. Physical Review E, 96(3). https://doi.org/10.1103/physreve.96.032139
-
-[2] Elf, J., Doncic, A., & Ehrenberg, M. (2003). Mesoscopic reaction-diffusion in intracellular signaling. In S. M. Bezrukov, H. Frauenfelder, & F. Moss (Eds.), Fluctuations and Noise in Biological, Biophysical, and Biomedical Systems. SPIE. https://doi.org/10.1117/12.497009
-
-
-[Back To The Top](#PHYS516FINAL)
-
----
-
-## Software And Installation
-#### Software
-The source code files are KMC.c, KMCP2D.c, KMCP3D.c, KMCH2D.c, and KMCH3D.c. ***All of these source code files rely on the header file minHeap.h being in the same folder***.
-1. KMC.c runs simulations of proteins diffusing in a 2D domain with a nanodomain of a different diffusion rate. Periodic boundaries are imposed to simulate and infinite membrane. Direction at each step is sampled uniformly (up,down,left,right) and the hop times are sampled from a Poisson distribution fitted to the local hopping time scaled by the number of transition states. This file outputs the concentration of proteins in the nanodomain as a function of time.
-2. KMCP2D.c runs simulations of bacteria hopping and trapping diffusion in a 2D domain. Direction at each step is sampled uniformly (up,down,left,right) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value. This file outputs the averaged diffusion coefficient as a function of the number of simulations used in its calculation.
-3. KMCP3D.c runs simulations of bacteria hopping and trapping diffusion in a 3D domain. Direction at each step is sampled uniformly (North,South,West,East,Above,Below) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value.
-are written in C. There is a header file minHeap.h with heap functions used in the source code files. This file outputs the averaged diffusion coefficient as a function of the number of simulations used in its calculation.
-4. minHeap.h holds binary minimum heap functions for sorting a double array into a binary minimum heap and using an additional interger array to keep track of their indexes. We use this to create a priority queue in our KMC simulations to tell us which lattice cell will have a state transition event next and at what time. The binary minimum heap functions are (a) parent node, (b) left child, (c) right child for finding the parent and children node of any node in the binary tree of the min heap, (d) heapify for downward percolation in sorting, (e) decrease key for upward percolation in sorting, (f) build a min heap for sorting a double array into a min heap by using heapify recurringly, and other trivial functions for swapping numbers and printing out the minheap to the terminal.
-
-#### Installation
-Download GitHub repo. This will contain the necessary make file and source code files for the simulations.
-
-
-[Back To The Top](#PHYS516FINAL)
-
----
-
-## How To Compile And Run It
-On a terminal one can compile the source code file KMC.c by a make file provided to run a simulation. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal. In practice, we redirect the output to an output file KMC.out to save the data run which can then be plotted in an external plotter. We used MATLAB to plot the lattice cell schematic, the data run, and to edit the plot aesthetically. Our MATLAB mfile for reading in the data and plotting is included in the repository. 
-
-$ make
-
-$ ./KMC > KMC.out
-
-To run simulations from the other source code files, one simply needs to change out "KMC.c" and "KMC" from in the make file to the name of the source code file simulation you want to build, compile, and run and the name of the executable you choose for it, respectively. 
-
-[Back To The Top](#PHYS516FINAL)
-
----
 
 ## 1. Protein Clustering
 #### Description
@@ -145,6 +88,36 @@ It has been observed that some bacteria will cluster to swim faster. We can mode
 
 #### References
 
+
+[Back To The Top](#PHYS516FINAL)
+
+---
+
+## Software And Installation
+#### Software
+The source code files are KMC.c, KMCP2D.c, KMCP3D.c, KMCH2D.c, and KMCH3D.c. ***All of these source code files rely on the header file minHeap.h being in the same folder***.
+1. KMC.c runs simulations of proteins diffusing in a 2D domain with a nanodomain of a different diffusion rate. Periodic boundaries are imposed to simulate and infinite membrane. Direction at each step is sampled uniformly (up,down,left,right) and the hop times are sampled from a Poisson distribution fitted to the local hopping time scaled by the number of transition states. This file outputs the concentration of proteins in the nanodomain as a function of time.
+2. KMCP2D.c runs simulations of bacteria hopping and trapping diffusion in a 2D domain. Direction at each step is sampled uniformly (up,down,left,right) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value. This file outputs the averaged diffusion coefficient as a function of the number of simulations used in its calculation.
+3. KMCP3D.c runs simulations of bacteria hopping and trapping diffusion in a 3D domain. Direction at each step is sampled uniformly (North,South,West,East,Above,Below) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value.
+are written in C. There is a header file minHeap.h with heap functions used in the source code files. This file outputs the averaged diffusion coefficient as a function of the number of simulations used in its calculation.
+4. minHeap.h holds binary minimum heap functions for sorting a double array into a binary minimum heap and using an additional interger array to keep track of their indexes. We use this to create a priority queue in our KMC simulations to tell us which lattice cell will have a state transition event next and at what time. The binary minimum heap functions are (a) parent node, (b) left child, (c) right child for finding the parent and children node of any node in the binary tree of the min heap, (d) heapify for downward percolation in sorting, (e) decrease key for upward percolation in sorting, (f) build a min heap for sorting a double array into a min heap by using heapify recurringly, and other trivial functions for swapping numbers and printing out the minheap to the terminal.
+
+#### Installation
+Download GitHub repo. This will contain the necessary make file and source code files for the simulations.
+
+
+[Back To The Top](#PHYS516FINAL)
+
+---
+
+## How To Compile And Run It
+On a terminal one can compile the source code file KMC.c by a make file provided to run a simulation. Then one can run the simulation by executing the executable generated, KMC. This will print the result to the terminal. In practice, we redirect the output to an output file KMC.out to save the data run which can then be plotted in an external plotter. We used MATLAB to plot the lattice cell schematic, the data run, and to edit the plot aesthetically. Our MATLAB mfile for reading in the data and plotting is included in the repository. 
+
+$ make
+
+$ ./KMC > KMC.out
+
+To run simulations from the other source code files, one simply needs to change out "KMC.c" and "KMC" from in the make file to the name of the source code file simulation you want to build, compile, and run and the name of the executable you choose for it, respectively. 
 
 [Back To The Top](#PHYS516FINAL)
 
