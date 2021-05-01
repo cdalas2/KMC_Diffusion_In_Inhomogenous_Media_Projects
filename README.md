@@ -1,7 +1,7 @@
 # PHYS516FINAL
 <img src="InhomogeneousSchematic.png " width="600" height="400">
 
-> Applying a kinetic monte carlo (KMC) method, for predicting the trajectories of freely diffusing particles in heterogeneous media [1,2], to investigate several problems in biophysics. This image was borrowed from reference [1].
+> Applying a kinetic monte carlo (KMC) method and variations, for predicting the trajectories of freely diffusing particles in heterogeneous media [1,2], to investigate several problems in biophysics. This image was borrowed from reference [1].
 
 ---
 
@@ -51,6 +51,8 @@ The source code files are KMC.c, KMCP2D.c, KMCP3D.c, KMCH2D.c, and KMCH3D.c.
 2. KMCP2D.c runs simulations of bacteria hopping and trapping diffusion in a 2D domain. Direction at each step is sampled uniformly (up,down,left,right) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value.
 3. KMCP3D.c runs simulations of bacteria hopping and trapping diffusion in a 3D domain. Direction at each step is sampled uniformly (North,South,West,East,Above,Below) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value.
 are written in C. There is a header file minHeap.h with heap functions used in the source code files.
+
+***All of these source code files rely on the header file minHeap.h being in the same folder***.
 
 #### Installation
 Download GitHub repo. This will contain the necessary make file and source code files for build and compilation of KMC.c. To build and compile the other simulations, go into the make file and switch out "KMC.c" the simulation source code file you want run.
