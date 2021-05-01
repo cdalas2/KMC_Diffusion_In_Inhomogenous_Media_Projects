@@ -46,10 +46,14 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 
 ## Software And Installation
 #### Software
-The source code file KMC.c is written in C. There is a header file minHeap.h with heap functions used in KMC.c.
+The source code files are KMC.c, KMCP2D.c, KMCP3D.c, KMCH2D.c, and KMCH3D.c.
+1. KMC.c runs simulations of proteins diffusing in a 2D domain with a nanodomain of a different diffusion rate. Periodic boundaries are imposed to simulate and infinite membrane. Direction at each step is sampled uniformly (up,down,left,right) and the hop times are sampled from a Poisson distribution fitted to the local hopping time scaled by the number of transition states. This file outputs the concentration of proteins in the nanodomain as a function of time.
+2. KMCP2D.c runs simulations of bacteria hopping and trapping diffusion in a 2D domain. Direction at each step is sampled uniformly (up,down,left,right) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value.
+3. KMCP3D.c runs simulations of bacteria hopping and trapping diffusion in a 3D domain. Direction at each step is sampled uniformly (North,South,West,East,Above,Below) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value.
+are written in C. There is a header file minHeap.h with heap functions used in the source code files.
 
 #### Installation
-Download github repo. This will contain the necessary make file and source code files for build and compilation of the C code.
+Download GitHub repo. This will contain the necessary make file and source code files for build and compilation of KMC.c. To build and compile the other simulations, go into the make file and switch out "KMC.c" the simulation source code file you want run.
 
 
 [Back To The Top](#PHYS516FINAL)
