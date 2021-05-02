@@ -12,8 +12,8 @@
   - [Results Of Protein Clustering Simulations](#results-of-protein-clustering-simulations)
   - [References For Protein Clustering Scenario](#references-for-protein-clustering-scenario)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
-  - [Subvolume Kinetic Monte Carlo With Distributed Hop Length](#subvolume-kinetic-monte-carlo-with-distributed-hop-length)
-    - [SKMCHL Simulation Steps](#skmchl-simulation-steps)
+  - [Subvolume Kinetic Monte Carlo With Distributed Hop Length And Trapped Time](#subvolume-kinetic-monte-carlo-with-distributed-hop-length-and-trapped-time)
+    - [SKMCHT Simulation Steps](#skmcht-simulation-steps)
   - [Results of Bacteria Hopping And Trapping Simulations](#results-of-bacteria-hopping-and-trapping-simulations)
   - [References For Bacteria Hopping And Trapping Scenario](#references-for-bacteria-hopping-and-trapping-scenario)
 - [3. Bacteria Bus Ride](#3-bacteria-bus-ride)
@@ -70,10 +70,10 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 ## 2. Bacteria Hopping And Trapping
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a an alteration of the subvolume KMC method. 
 
-### Subvolume Kinetic Monte Carlo With Distributed Hop Length
+### Subvolume Kinetic Monte Carlo With Distributed Hop Length And Trapped Time
 We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the hop lengths and trapped times in addition to the event time.
 
-#### SKMCHL Simulation Steps
+#### SKMCHT Simulation Steps
 1. Domain area/volume is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed amongs the lattice cells.
                         Each lattice cell is assigned a Poisson distribution randomly sampled trapped time between states, *&tau;*.
