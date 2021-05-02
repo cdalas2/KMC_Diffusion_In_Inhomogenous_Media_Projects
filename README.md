@@ -12,12 +12,12 @@
   - [Results Of Protein Clustering Simulations](#results-of-protein-clustering-simulations)
   - [References For Protein Clustering Scenario](#references-for-protein-clustering-scenario)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
-  - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
+  - [Subvolume Kinetic Monte Carlo With Distributed Hop Length](#subvolume-kinetic-monte-carlo-with-distributed-hop-length)
     - [Simulation Steps](#simulation-steps)
   - [Results of Bacteria Hopping And Trapping Simulations](#results-of-bacteria-hopping-and-trapping-simulations)
   - [References For Bacteria Hopping And Trapping Scenario](#references-for-bacteria-hopping-and-trapping-scenario)
 - [3. Bacteria Bus Ride](#3-bacteria-bus-ride)
-  - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
+  - [Subvolume Kinetic Monte Carlo With Translating Microdomains](#subvolume-kinetic-monte-carlo-with-translating-microdomains)
     - [Simulation Steps](#simulation-steps)
   - [Results of Bacteria Bus Ride Simulations](#results-of-bacteria-bus-ride-simulations)
   - [References For Bacteria Bus Ride Scenario](#references-for-bacteria-bus-ride-scenario)
@@ -69,6 +69,24 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 
 ## 2. Bacteria Hopping And Trapping
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a an alteration of the subvolume KMC method. 
+
+### Subvolume Kinetic Monte Carlo With Distributed Hop Length
+We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
+
+#### Simulation Steps
+1. Domain patch is divided into *K* lattice cells.
+2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
+                        Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
+                        Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
+                        Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
+                        hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
+3. Sort lattice cells by their event time in a binary min heap. 
+4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
+5. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
+6. Update lattice info of lattice cells involved in the particle exchange.
+7. Calculate new event times using random numbers for the lattice cells involved.
+8. Re-sort the binary heap if necessary.
+9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Hopping And Trapping Simulations
 
