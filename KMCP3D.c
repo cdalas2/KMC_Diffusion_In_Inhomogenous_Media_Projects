@@ -15,19 +15,20 @@ USAGE
 #include <math.h>
 #include "minHeap.h"
 
-#define SNAPSHOT_RATE 1000 /* we take a snapshot after every SNAPSHOT_RATE events */
+#define SNAPSHOT_RATE 1 /* we take a snapshot after every SNAPSHOT_RATE events */
 #define TOTAL_BACTERIA_NUM 1 /* Total number of emerin monomer proteins */
 #define NUM_CELLS_ONESIDE 5 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
 #define N0 (TOTAL_BACTERIA_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
 #define V (40.0*40.0*40) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
 #define LATTICE_CELL_LENGTH 1.0 /* lattice cell length (=1 micrometer/SCALE)*/
-#define TAU_TRAPPED (0.34)/* time between hops inside nanodomain (s) */
+#define TAU_TRAPPED (0.4999/2.0)/* time between hops inside nanodomain (s) */
 #define TAU_HOP 0.0 /* time between hops outside nanodomain (s) */
 #define SCALE 100.0
 #define COORDF 1.0
-#define HOP_AVG (2.79*SCALE)
-#define TIME_MAX 3600.0
+#define HOP_AVG (3.24*SCALE)
+#define TIME_MAX 100.0
+#define ITER_MAX 100000
 #define DIM 3
 
 int main() {
@@ -129,7 +130,7 @@ int main() {
     }
   }
 srand(time(NULL));
-for (int iter=0; iter < 10000000; iter++){
+for (int iter=0; iter < ITER_MAX; iter++){
   x = 0;
   y = 0;
   z = 0;
