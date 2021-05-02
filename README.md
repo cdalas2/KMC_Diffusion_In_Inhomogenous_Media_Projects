@@ -5,7 +5,7 @@
 
 ---
 
-## Table of Contents
+### Table of Contents
 - [1. Protein Clustering](#1-protein-clustering)
   - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
@@ -17,14 +17,14 @@
 ---
 
 
-### 1. Protein Clustering
+## 1. Protein Clustering
 We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
 <img src="KMC_ProjectNotes.pdf ">
 
-#### Subvolume Kinetic Monte Carlo
+### Subvolume Kinetic Monte Carlo
 We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
 
-##### Simulation steps
+#### Simulation steps
 1. Domain patch is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
                         Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
@@ -39,10 +39,10 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 8. Re-sort the binary heap if necessary.
 9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
-#### Results
+### Results
 <img src="Lattice.png " width="425" height="375"><img src="KMC_freeDiffusion.png " width="525" height="375">
 
-#### References
+### References
 [1] Li, Y., Kahraman, O., & Haselwandter, C. A. (2017). Distribution of randomly diffusing particles in inhomogeneous media. Physical Review E, 96(3). https://doi.org/10.1103/physreve.96.032139
 
 [2] Elf, J., Doncic, A., & Ehrenberg, M. (2003). Mesoscopic reaction-diffusion in intracellular signaling. In S. M. Bezrukov, H. Frauenfelder, & F. Moss (Eds.), Fluctuations and Noise in Biological, Biophysical, and Biomedical Systems. SPIE. https://doi.org/10.1117/12.497009
@@ -55,15 +55,15 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 ---
 
 ## 2. Bacteria Hopping And Trapping
-#### Description
+### Description
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a coarse grain KMC method
 
 
 When the bacteria finds a way out of the pore it swims freely until it becomes trapped again and this is termed as hopping. We can model the pores as individual microdomains and apply periodic boundary conditions to determine its diffusive rate through the domain patch. Using this diffusion rate we can model bacteria swimming over longer length scales where they encounter a microdomain of several pores within which they have this diffusion rate.
 
-#### Results
+### Results
 
-#### References
+### References
 [4] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
 [5] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
@@ -80,12 +80,12 @@ When the bacteria finds a way out of the pore it swims freely until it becomes t
 ---
 
 ## 3. How Did The Bacteria Cross The Road?
-#### Description
+### Description
 It has been observed that some bacteria will cluster to swim faster. We can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again.
 
-#### Results
+### Results
 
-#### References
+### References
 
 
 [Back To The Top](#PHYS516FINAL)
@@ -93,7 +93,7 @@ It has been observed that some bacteria will cluster to swim faster. We can mode
 ---
 
 ## Software And Installation
-#### Software
+### Software
 The source code files are KMC.c, KMCP2D.c, KMCP3D.c, KMCH2D.c, and KMCH3D.c. ***All of these source code files rely on the header file minHeap.h being in the same folder***.
 1. KMC.c runs simulations of proteins diffusing in a 2D domain with a nanodomain of a different diffusion rate. Periodic boundaries are imposed to simulate and infinite membrane. Direction at each step is sampled uniformly (up,down,left,right) and the hop times are sampled from a Poisson distribution fitted to the local hopping time scaled by the number of transition states. This file outputs the concentration of proteins in the nanodomain as a function of time.
 2. KMCP2D.c runs simulations of bacteria hopping and trapping diffusion in a 2D domain. Direction at each step is sampled uniformly (up,down,left,right) and the hop lengths and trapped times are sampled from Poisson distributions. The trapped time Poisson distribution is fitted to its mean value scaled the number of transition states. The hop length Poisson distribution is fitted to its mean value. This file outputs the averaged diffusion coefficient as a function of the number of simulations used in its calculation.
@@ -101,7 +101,7 @@ The source code files are KMC.c, KMCP2D.c, KMCP3D.c, KMCH2D.c, and KMCH3D.c. ***
 are written in C. There is a header file minHeap.h with heap functions used in the source code files. This file outputs the averaged diffusion coefficient as a function of the number of simulations used in its calculation.
 4. minHeap.h holds binary minimum heap functions for sorting a double array into a binary minimum heap and using an additional interger array to keep track of their indexes. We use this to create a priority queue in our KMC simulations to tell us which lattice cell will have a state transition event next and at what time. The binary minimum heap functions are (a) parent node, (b) left child, (c) right child for finding the parent and children node of any node in the binary tree of the min heap, (d) heapify for downward percolation in sorting, (e) decrease key for upward percolation in sorting, (f) build a min heap for sorting a double array into a min heap by using heapify recurringly, and other trivial functions for swapping numbers and printing out the minheap to the terminal.
 
-#### Installation
+### Installation
 Download GitHub repo. This will contain the necessary make file and source code files for the simulations.
 
 
