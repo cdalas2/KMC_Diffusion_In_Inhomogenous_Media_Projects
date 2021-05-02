@@ -16,11 +16,11 @@
     - [Simulation Steps](#simulation-steps)
   - [Results of Bacteria Hopping And Trapping Simulations](#results-of-bacteria-hopping-and-trapping-simulations)
   - [References For Bacteria Hopping And Trapping Scenario](#references-for-bacteria-hopping-and-trapping-scenario)
-- [3. Bacteria Car Pooling](#3-bacteria-car-pooling)
+- [3. Bacteria Bus Ride](#3-bacteria-bus-ride)
   - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
     - [Simulation Steps](#simulation-steps)
-  - [Results of Bacteria Car Pooling Simulations](#results-of-bacteria-car-pooling-simulations)
-  - [References For Bacteria Car Pooling Scenario](#references-for-bacteria-car-pooling-scenario)
+  - [Results of Bacteria Bus Ride Simulations](#results-of-bacteria-bus-ride-simulations)
+  - [References For Bacteria Bus Ride Scenario](#references-for-bacteria-bus-ride-scenario)
 - [Software And Installation](#software-and-installation)
   - [Software](#software)
   - [Installation](#installation)
@@ -52,10 +52,10 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 8. Re-sort the binary heap if necessary.
 9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
-### Results
+### Results Of Protein Clustering Simulations
 <img src="Lattice.png " width="425" height="375"><img src="KMC_freeDiffusion.png " width="525" height="375">
 
-### References
+### References For Protein Clustering Scenario
 [1] Li, Y., Kahraman, O., & Haselwandter, C. A. (2017). Distribution of randomly diffusing particles in inhomogeneous media. Physical Review E, 96(3). https://doi.org/10.1103/physreve.96.032139
 
 [2] Elf, J., Doncic, A., & Ehrenberg, M. (2003). Mesoscopic reaction-diffusion in intracellular signaling. In S. M. Bezrukov, H. Frauenfelder, & F. Moss (Eds.), Fluctuations and Noise in Biological, Biophysical, and Biomedical Systems. SPIE. https://doi.org/10.1117/12.497009
@@ -70,9 +70,9 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 ## 2. Bacteria Hopping And Trapping
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a an alteration of the subvolume KMC method. 
 
-### Results
+### Results Of Bacteria Hopping And Trapping Simulations
 
-### References
+### References For Bacteria Hopping And Trapping Scenario
 [4] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
 [5] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
@@ -88,12 +88,12 @@ Many bacteria swim in the form of a random walk in order to sample an area and b
 
 ---
 
-## 3. How Did The Bacteria Cross The Road?
+## 3. Bacteria Bus Ride
 It has been observed that some bacteria will cluster to swim faster. We can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again.
 
-### Results
+### Results Of Bacteria Bus Ride Simulations
 
-### References
+### References For Bacteria Bus Ride Scenario
 
 
 [Back To The Top](#PHYS516FINAL)
