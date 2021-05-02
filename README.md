@@ -53,6 +53,8 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Protein Clustering Simulations
+We used the lattice discretization of the domain and nanodomain shown in the figure on the left; the nanodomain is highlighted in red.
+We evolved the system of proteins for about 4 hours at which it was at a steady state with a nanodomain protein concentration of about 53%.
 <img src="Lattice.png " width="425" height="375"><img src="KMC_freeDiffusion.png " width="525" height="375">
 
 ### References For Protein Clustering Scenario
