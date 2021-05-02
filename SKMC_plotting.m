@@ -1,4 +1,4 @@
-data = load("KMC.out");
+data = load("SKMC.o");
 N = data(:,1);
 t = data(:,3)/3600;
 
