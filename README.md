@@ -8,17 +8,17 @@
 ### Table of Contents
 - [1. Protein Clustering](#1-protein-clustering)
   - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
-    - [Simulation Steps](#simulation-steps)
+    - [SKMC Simulation Steps](#simulation-steps)
   - [Results Of Protein Clustering Simulations](#results-of-protein-clustering-simulations)
   - [References For Protein Clustering Scenario](#references-for-protein-clustering-scenario)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
   - [Subvolume Kinetic Monte Carlo With Distributed Hop Length](#subvolume-kinetic-monte-carlo-with-distributed-hop-length)
-    - [Simulation Steps](#simulation-steps)
+    - [SKMCHL Simulation Steps](#simulation-steps)
   - [Results of Bacteria Hopping And Trapping Simulations](#results-of-bacteria-hopping-and-trapping-simulations)
   - [References For Bacteria Hopping And Trapping Scenario](#references-for-bacteria-hopping-and-trapping-scenario)
 - [3. Bacteria Bus Ride](#3-bacteria-bus-ride)
   - [Subvolume Kinetic Monte Carlo With Translating Microdomains](#subvolume-kinetic-monte-carlo-with-translating-microdomains)
-    - [Simulation Steps](#simulation-steps)
+    - [SKMCTM Simulation Steps](#simulation-steps)
   - [Results of Bacteria Bus Ride Simulations](#results-of-bacteria-bus-ride-simulations)
   - [References For Bacteria Bus Ride Scenario](#references-for-bacteria-bus-ride-scenario)
 - [Software And Installation](#software-and-installation)
@@ -37,7 +37,7 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 ### Subvolume Kinetic Monte Carlo
 We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
 
-#### Simulation Steps
+#### SKMC Simulation Steps
 1. Domain patch is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
                         Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
@@ -73,7 +73,7 @@ Many bacteria swim in the form of a random walk in order to sample an area and b
 ### Subvolume Kinetic Monte Carlo With Distributed Hop Length
 We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
 
-#### Simulation Steps
+#### SKMCHL Simulation Steps
 1. Domain patch is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
                         Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
@@ -108,6 +108,24 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 
 ## 3. Bacteria Bus Ride
 It has been observed that some bacteria will cluster to swim faster. We can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again.
+
+### Subvolume Kinetic Monte Carlo With Translating Microdomains
+We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
+
+#### SKMCTM Simulation Steps
+1. Domain patch is divided into *K* lattice cells.
+2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
+                        Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
+                        Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
+                        Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
+                        hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
+3. Sort lattice cells by their event time in a binary min heap. 
+4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
+5. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
+6. Update lattice info of lattice cells involved in the particle exchange.
+7. Calculate new event times using random numbers for the lattice cells involved.
+8. Re-sort the binary heap if necessary.
+9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Bus Ride Simulations
 
