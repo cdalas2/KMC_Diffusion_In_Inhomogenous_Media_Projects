@@ -2,7 +2,7 @@
 src = $(wildcard *.cpp)
 obj = $(src:.cpp=.o)
 dep = $(obj:.o=.d)  # one dependency file for each source
-prefix = KMC
+prefix = SKMC
 suffix =
 conda_path =
 
