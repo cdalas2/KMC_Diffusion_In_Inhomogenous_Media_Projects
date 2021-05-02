@@ -1,11 +1,11 @@
 data = load("SKMCHT19.o");
-iter19 = data(:,1);
+iter19 = data(:,1)+1;
 D19 = data(:,2);
 data = load("SKMCHT25.o");
-iter25 = data(:,1);
+iter25 = data(:,1)+1;
 D25 = data(:,2);
 data = load("SKMCHT36.o");
-iter36 = data(:,1);
+iter36 = data(:,1)+1;
 D36 = data(:,2);
 
 D19kmc = D19(end);
