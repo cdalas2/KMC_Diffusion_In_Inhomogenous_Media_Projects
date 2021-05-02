@@ -71,21 +71,21 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a an alteration of the subvolume KMC method. 
 
 ### Subvolume Kinetic Monte Carlo With Distributed Hop Length
-We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
+We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the hop lengths and trapped times in addition to the event time.
 
 #### SKMCHL Simulation Steps
 1. Domain area/volume is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed amongs the lattice cells.
                         Each lattice cell is assigned a Poisson distribution randomly sampled trapped time between states, *&tau;*.
                         Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Assign event times to each lattice cell using the transition rates. Only one particle hop 
+                        Assign sampled event times to each lattice cell using the transition rates. Only one particle hop 
                         is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
 3. Sort lattice cells by their event time in a binary min heap. 
 4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
 5. Randomly pick a direction for the particle to hop along.
 6. Assigned a Poisson distribution randomly sampled hop length for the particle to hop in the randomly chosen direction.
 7. Update lattice info of lattice cells involved in the particle exchange.
-8. Calculate new event times using the new occupation numbers and a new sampled trapped time for the lattice cells involved.
+8. Sample new event times using the new occupation numbers and new sampled trapped times for the lattice cells involved.
 9. Re-sort the binary heap if necessary.
 10. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
@@ -111,22 +111,8 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 It has been observed that some bacteria will cluster to swim faster. We can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again.
 
 ### Subvolume Kinetic Monte Carlo With Translating Microdomains
-We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
 
 #### SKMCTM Simulation Steps
-1. Domain patch is divided into *K* lattice cells.
-2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
-                        Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
-                        Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
-                        hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
-3. Sort lattice cells by their event time in a binary min heap. 
-4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
-5. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
-6. Update lattice info of lattice cells involved in the particle exchange.
-7. Calculate new event times using random numbers for the lattice cells involved.
-8. Re-sort the binary heap if necessary.
-9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Bus Ride Simulations
 
