@@ -92,7 +92,6 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the 
 ### Results Of Bacteria Hopping And Trapping Simulations
 <img src="SKMCHT_KMCvsEXP.png " width="525" height="375">
 
-
 ### References For Bacteria Hopping And Trapping Scenario
 [4] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
