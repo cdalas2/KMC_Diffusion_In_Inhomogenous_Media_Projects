@@ -8,6 +8,7 @@
 ### Table of Contents
 - [1. Protein Clustering](#1-protein-clustering)
   - [Subvolume Kinetic Monte Carlo](#subvolume-kinetic-monte-carlo)
+    -[Simulation Steps(#simulation-steps)
 - [2. Bacteria Hopping And Trapping](#2-bacteria-hopping-and-trapping)
 - [3. How Did The Bacteria Cross The Road?](#3-how-did-the-bacteria-cross-the-road)
 - [Software And Installation](#software-and-installation)
@@ -24,7 +25,7 @@ We will look at the phenomenon of monomer emerin proteins freely diffusing throu
 ### Subvolume Kinetic Monte Carlo
 We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
 
-#### Simulation steps
+#### Simulation Steps
 1. Domain patch is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
                         Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
