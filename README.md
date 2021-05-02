@@ -94,7 +94,7 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the 
 10. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Hopping And Trapping Simulations
-We ran 100s simulations of a single bacteria transitioning between trapped states in a domain volume. We ran the simulation 100000 times, averaging over the diffusion coefficient as a function of iterations; this is shown in the figure on the left. We compared our simulated diffusion coefficients average over 100000 iterations against the measured coefficients of [4] for pore distributions with characteristic pore sizes 3.6, 2.5, and 1.9 &mu;m. We found that the measured diffusivities of the experiments in [4] are on average ~(0.9+-0.1) times our simulated diffusivities averaged over 100000 100s iterations.
+We ran 100s simulations of a single bacteria transitioning between trapped states in a domain volume. We ran the simulation 100000 times, averaging over the diffusion coefficient as a function of iterations; this is shown in the figure on the left. We compared our simulated diffusion coefficients average over 100000 iterations against the measured coefficients of [4] for pore distributions with characteristic pore sizes 3.6, 2.5, and 1.9 &mu;m. We found that the measured diffusivities of the experiments in [4] are about (0.9+-0.1) times our simulated diffusivities averaged over 100000 100s iterations.
 
 <img src="SKMCHT_DiffusionIters.png " width="500" height="375"><img src="SKMCHT_KMCvsEXP.png " width="500" height="375">
 
