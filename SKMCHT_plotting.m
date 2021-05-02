@@ -17,9 +17,10 @@ D25exp = 1;
 D36exp = 2;
 
 Dkmc = [D19kmc,D25kmc,D36kmc];
+Dkmc = [0.67, 1.0, 2.3];
 Dexp = [D19exp,D25exp,D36exp];
 xfit = [0.25:0.25:2.75];
-yfit = 0.8548*xfit;
+yfit = 0.88*xfit;
 figure(31)
 hold on
 for i = 1:3
