@@ -55,7 +55,7 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 ### Results Of Protein Clustering Simulations
 We used the lattice discretization of the domain and nanodomain shown in the figure on the left; the nanodomain is highlighted in red.
 We evolved the system of proteins for about 4 hours at which it was at a steady state with a nanodomain protein concentration of about 53%. Averaging the protein concentration over the 4 hours gave a mean concentration that differed less than 1% from the analytical solution for this situation; shown in the figure on the right.
-It is also interesting that this simple model which could be characterized by a different diffusion rate in the nanodomain suggests that protein clustering emerges from a change in diffusion rates in part of the domain.
+It is also interesting that this simple model which could be characterized by a different diffusion rate in the nanodomain suggests that protein clustering emerges from a change in diffusion rates in part of the domain. Diffusion rates can be varied by means of a mechanical stress on the membrane.
 <img src="Lattice.png " width="425" height="375"><img src="KMC_freeDiffusion.png " width="525" height="375">
 
 ### References For Protein Clustering Scenario
