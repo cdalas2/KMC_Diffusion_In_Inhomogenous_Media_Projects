@@ -27,4 +27,11 @@ for i = 1:3
 end
 plot(xfit,yfit,'k-','linewidth',3)
 hold off
+
+figure(32)
+hold on
+plot(iter19,D19,'m.');
+plot(iter25,D25,'g.');
+plot(iter36,D36,'b.');
+hold off
     

@@ -27,4 +27,10 @@ for i = 1:3
 end
 plot(xfit,yfit,'k-','linewidth',3)
 hold off
+
+figure(32)
+hold on
+plot(iter19,D19,'r.');
+
+hold off
     
