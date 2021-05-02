@@ -98,6 +98,7 @@ We ran 100s simulations of a single bacteria transitioning between trapped state
 
 <img src="SKMCHT_DiffusionIters.png " width="500" height="375"><img src="SKMCHT_KMCvsEXP.png " width="500" height="375">
 
+
 ### References For Bacteria Hopping And Trapping Scenario
 [4] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
