@@ -74,19 +74,20 @@ Many bacteria swim in the form of a random walk in order to sample an area and b
 We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time.
 
 #### SKMCHL Simulation Steps
-1. Domain patch is divided into *K* lattice cells.
-2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
-                        Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
+1. Domain area/volume is divided into *K* lattice cells.
+2. Assign lattice info: System start state is *M* particles uniformly distributed amongs the lattice cells.
+                        Each lattice cell is assigned a Poisson distribution randomly sampled trapped time between states, *&tau;*.
                         Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
-                        hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
+                        Assign event times to each lattice cell using the transition rates. Only one particle hop 
+                        is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
 3. Sort lattice cells by their event time in a binary min heap. 
 4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
-5. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
-6. Update lattice info of lattice cells involved in the particle exchange.
-7. Calculate new event times using random numbers for the lattice cells involved.
-8. Re-sort the binary heap if necessary.
-9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
+5. Randomly pick a direction for the particle to hop along.
+6. Assigned a Poisson distribution randomly sampled hop length for the particle to hop in the randomly chosen direction.
+7. Update lattice info of lattice cells involved in the particle exchange.
+8. Calculate new event times using the new occupation numbers and a new sampled trapped time for the lattice cells involved.
+9. Re-sort the binary heap if necessary.
+10. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Hopping And Trapping Simulations
 
