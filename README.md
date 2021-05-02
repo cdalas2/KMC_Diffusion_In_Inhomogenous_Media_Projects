@@ -90,7 +90,6 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the 
 10. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Hopping And Trapping Simulations
-<img src="SKMCHT_KMCvsEXP.png " width="525" height="375">
 
 
 ### References For Bacteria Hopping And Trapping Scenario
