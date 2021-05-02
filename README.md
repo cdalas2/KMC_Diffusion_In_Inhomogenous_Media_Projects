@@ -83,7 +83,7 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the 
 3. Sort lattice cells by their event time in a binary min heap. 
 4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
 5. Randomly pick a direction for the particle to hop along.
-6. Assigned a Poisson distribution randomly sampled hop length for the particle to hop in the randomly chosen direction.
+6. Assign a Poisson distribution randomly sampled hop length for the particle to hop in the randomly chosen direction.
 7. Update lattice info of lattice cells involved in the particle exchange.
 8. Sample new event times using the new occupation numbers and new sampled trapped times for the lattice cells involved.
 9. Re-sort the binary heap if necessary.
