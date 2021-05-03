@@ -2,7 +2,7 @@
 
 https://user-images.githubusercontent.com/62254347/116847393-47f01c00-ab9f-11eb-92a6-7ece68e53c37.mp4
 
-> We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. This image was borrowed from reference [1].
+> We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. This video is of a bacteria simulated to diffuse in a porous media with pores of characteristic size 3.6 &mu;m using measurements from [4].
 
 ---
 
