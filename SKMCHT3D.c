@@ -22,13 +22,13 @@ USAGE
 #define N0 (TOTAL_BACTERIA_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
 #define V (40.0*40.0*40) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
 #define LATTICE_CELL_LENGTH 1.0 /* lattice cell length (=1 micrometer/SCALE)*/
-#define TAU_TRAPPED (0.25/2.0)/* time between hops inside nanodomain (s) */
+#define TAU_TRAPPED (0.9/2.0)/* time between hops inside nanodomain (s) */
 #define TAU_HOP 0.0 /* time between hops outside nanodomain (s) */
 #define SCALE 100.0
 #define COORDF 1.0
-#define HOP_AVG (3.24*SCALE)
+#define HOP_AVG (2.79*SCALE)
 #define TIME_MAX 600.0
-#define ITER_MAX 1
+#define ITER_MAX 100000
 #define DIM 3
 
 int main() {
@@ -132,7 +132,7 @@ int main() {
 
 srand(time(NULL));
 
-printf("0\t0\t0\t0\t0\n");
+// printf("0\t0\t0\t0\t0\n");
 for (int iter=0; iter < ITER_MAX; iter++){
   x = 0;
   y = 0;
@@ -202,7 +202,7 @@ for (int iter=0; iter < ITER_MAX; iter++){
         z = z-hop;
         break;
     }
-    printf("%d\t%d\t%d\t%d\t%f\n",pt+1,x,y,z,t[0]);
+    // printf("%d\t%d\t%d\t%d\t%f\n",pt+1,x,y,z,t[0]);
 
     /* grab the index of the lattice cell where the next event will occur */
     lambda = Q[0];
@@ -292,7 +292,7 @@ for (int iter=0; iter < ITER_MAX; iter++){
       /* we keep track of the concentration of proteins in the nanodomain
          Nin/Ntot as a function of simulation time t[0] */
       // printf("%d\t%f\t%d\n",pt,t[0],hop);
-    // printf("%d\t%f\n",iter,DAVG);
+    printf("%d\t%f\n",iter,DAVG);
   }
 }
 printf("%f",DAVG);
