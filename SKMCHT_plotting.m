@@ -43,12 +43,44 @@ xcoord = walkData(1:end-1,2)*0.01;
 ycoord = walkData(1:end-1,3)*0.01;
 zcoord = walkData(1:end-1,4)*0.01;
 simT = walkData(1:end-1,5);
+close all
 
 figure(33)
 hold on
-plot3(xcoord(1),ycoord(1),zcoord(1),'ro');
-plot3(xcoord(end),ycoord(end),zcoord(end),'co');
+plot3(xcoord(1),ycoord(1),zcoord(1),'go','markersize',30,'linewidth',30);
+plot3(xcoord(end),ycoord(end),zcoord(end),'rx','markersize',30,'linewidth',30);
+xlabel('$x$ ($\mu$m)','interpreter','latex','fontsize',19);
+ylabel('$y$ ($\mu$m)','interpreter','latex','fontsize',19);
+zlabel('$z$ ($\mu$m)','interpreter','latex','fontsize',19);
+
+curve = animatedline('linewidth',2);
+view(43,24);
+set(gca, 'XLim', [-60 80], 'YLim', [-80 60], 'ZLim', [-20 65]);
+% set(gca,'XColor', 'none','YColor','none','ZColor','none');
+set(gca,'Color','none');
+addpoints(curve,xcoord(1),ycoord(1),zcoord(1));
+head = scatter3(xcoord(1),ycoord(1),zcoord(1),'filled','MarkerFaceColor','b','MarkerEdgeColor','b');
+v = VideoWriter('poreWalk3D');
+v.Quality = 95;
+open(v);
+M(1) = getframe(gcf);
+writeVideo(v,M(1));
 for i = 1:( length(xcoord)-1 )
-    plot3(xcoord(i:(i+1)),ycoord(i:(i+1)),zcoord(i:(i+1)),'linewidth',1.0);
+    pause((simT(i+1)-simT(i))/10);
+    delete(head);
+    addpoints(curve,xcoord(i+1),ycoord(i+1),zcoord(i+1));
+    head = scatter3(xcoord(i+1),ycoord(i+1),zcoord(i+1),'filled','MarkerFaceColor','b','MarkerEdgeColor','b');
+%     h = plot3(xcoord(i),ycoord(i),zcoord(i),'b.','markersize',30,'linewidth',30);
+%     pause((simT(i+1)-simT(i))/100);
+%     delete(h);
+%     h = plot3(xcoord(i:(i+1)),ycoord(i:(i+1)),zcoord(i:(i+1)),'b.-','markersize',30,'linewidth',2);
+%     hold all
+    drawnow
+    simT(i+1)
+    M(i+1) = getframe(gcf);
+    writeVideo(v,M(i+1));
 end
+close(v);
+movie(M);
+% set(gca, 'XLim', [0 1], 'YLim', [0 1], 'ZLim', [0 1]); grid on
     hold off
