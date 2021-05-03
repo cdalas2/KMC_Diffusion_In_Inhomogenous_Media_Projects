@@ -1,3 +1,7 @@
+
+
+https://user-images.githubusercontent.com/62254347/116847128-c4362f80-ab9e-11eb-8510-4c5844a59443.mp4
+
 # PHYS516FINAL
 <img src="poreWalk3D.png " width="800" height="550">
 
