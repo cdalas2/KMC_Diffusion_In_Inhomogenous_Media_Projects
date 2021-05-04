@@ -107,13 +107,9 @@ We ran 10-minute simulations of a single bacteria transitioning between trapped 
 ### References For Bacteria Hopping And Trapping Scenario
 [4] Bhattacharjee, T., & Datta, S. S. (2019). Bacterial hopping and trapping in porous media. Nature Communications, 10(1). https://doi.org/10.1038/s41467-019-10115-1
 
-[5] Perez, L. J., Bhattacharjee, T., Datta, S. S., Parashar, R., & Sund, N. L. (2021). Impact of confined geometries on hopping and trapping of motile bacteria in porous media. Physical Review E, 103(1). https://doi.org/10.1103/physreve.103.012611
+[5] https://www.youtube.com/watch?v=JaxT-rZpte0
 
-[6] Bhattacharjee, T., Amchin, D. B., Ott, J. A., Kratz, F., & Datta, S. S. (2020). Chemotactic Migration of Bacteria in Porous Media. Cold Spring Harbor Laboratory. https://doi.org/10.1101/2020.08.10.244731
-
-[7] https://www.youtube.com/watch?v=JaxT-rZpte0
-
-[8] https://www.youtube.com/watch?v=pjoojqw877A
+[6] https://www.youtube.com/watch?v=pjoojqw877A
 
 
 [Back To The Top](#PHYS516FINAL)
