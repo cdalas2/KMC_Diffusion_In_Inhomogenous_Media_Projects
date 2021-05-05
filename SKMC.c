@@ -15,7 +15,7 @@ USAGE
 #include <math.h>
 #include "minHeap.h"
 
-#define SNAPSHOT_RATE 200000 /* we take a snapshot after every SNAPSHOT_RATE events */
+#define SNAPSHOT_RATE 1 /* we take a snapshot after every SNAPSHOT_RATE events */
 #define TOTAL_PROTEIN_NUM 1600 /* Total number of emerin monomer proteins */
 #define NUM_CELLS_ONESIDE 40 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
