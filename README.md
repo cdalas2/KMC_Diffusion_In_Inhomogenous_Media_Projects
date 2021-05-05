@@ -1,5 +1,6 @@
 # PHYS516FINAL
 > We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
+
 https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-8b3e-be868e8ae310.mp4
 > This video is of a non-interacting bacteria population diffusing through pores of characteristic size 3.24 &mu;m with measurement taken from [4], where we initialized the simulation with the entire population of bacteria in one cell, as to simulate the population emerging from a pipette or syringe; periodic boundary conditions are enforced at the boundaries of the domain volume. The simulated time was 20s, but the video is slowed to 99s.
 
