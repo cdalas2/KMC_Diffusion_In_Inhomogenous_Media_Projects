@@ -4,7 +4,9 @@ https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-
 
 https://user-images.githubusercontent.com/62254347/116847393-47f01c00-ab9f-11eb-92a6-7ece68e53c37.mp4
 
-> We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. This video is of a bacteria simulated to diffuse in a porous media with pores of characteristic size 3.6 &mu;m, using measurements from [4]. These videos are of a 10-minute simulated run sped up by about 22 times.
+> We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
+> 
+> The 1st video is of a non-interacting bacteria population diffusing through pores of characteristic size 3.24 &mu;m with measurement taken from [4], where we initialized the simulation with the entire population of bacteria in one cell, as to simulate the population emerging from a pipette or syringe; periodic boundary conditions are enforced at the boundaries of the domain volume. The simulated time was 20s, but the video is slowed to 99s. In the 2nd video, we show the random walk of a single bacteria through a pore space with pores of characteristic size 3.6 &mu;m and using measurments from [4]. Here we show its diffusion without periodic boundary conditions but in an infinite domain. The simulation time is 10-minutes, though the video, here, has been condensed to 27s.
 
 ---
 
@@ -85,17 +87,17 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the 
 
 #### SKMCHT Simulation Steps
 1. Domain area/volume is divided into *K* lattice cells.
-2. Assign lattice info: System start state is *M* particles uniformly distributed amongs the lattice cells.
+2. Assign lattice info: System start state is *M* particles distributed amongst the lattice cells. 
                         Each lattice cell is assigned a Poisson distribution randomly sampled trapped time between states, *&tau;*.
                         Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Assign sampled event times to each lattice cell using the transition rates. Only one particle hop 
+                        Assign sampled event times to each lattice cell using the transition rates (*t = 1/W*). Only one particle hop 
                         is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
 3. Sort lattice cells by their event time in a binary min heap. 
 4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
-5. Randomly pick a direction for the particle to hop along.
+5. Randomly pick a direction for the particle to hop along by a uniform distribution.
 6. Assign a Poisson distribution randomly sampled hop length for the particle to hop in the randomly chosen direction.
 7. Update lattice info of lattice cells involved in the particle exchange.
-8. Sample new event times using the new occupation numbers and new sampled trapped times for the lattice cells involved.
+8. Assign new event times using the new occupation numbers and new sampled trapped times for the lattice cells involved.
 9. Re-sort the binary heap if necessary.
 10. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
