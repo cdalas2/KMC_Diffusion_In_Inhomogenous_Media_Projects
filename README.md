@@ -44,9 +44,9 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 #### SKMC Simulation Steps
 1. Domain patch is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
-                        Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
+                        Each lattice cell is assigned an average wait time between hops, *&tau;*, depending on its domain type.
                         Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
+                        Sample event times for each lattice cell using random numbers and the transition rates. Only one particle 
                         hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
 3. Sort lattice cells by their event time in a binary min heap. 
 4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
