@@ -78,10 +78,9 @@ It is also interesting that this simple model which could be characterized by a 
 
 ## 2. Bacteria Hopping And Trapping
 https://user-images.githubusercontent.com/62254347/116849027-bbdff380-aba2-11eb-941d-144c1c617acd.mp4
-
+>This video is the same simulation as the second video at the top, but with a black background and without the trajectory line.
 
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a an alteration of the subvolume KMC method. PROJECT NOTES---> <img src="KMC_Bacteria_Hopping_And_Trapping.pdf ">
->This video is the same simulation as the second video at the top, but with a black background and without the trajectory line.
 
 ### Subvolume Kinetic Monte Carlo With Distributed Hop Length And Trapped Time
 We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the hop lengths and trapped times in addition to the event time.
