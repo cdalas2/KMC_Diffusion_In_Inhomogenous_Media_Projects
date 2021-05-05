@@ -16,19 +16,19 @@ USAGE
 #include "minHeap.h"
 
 #define SNAPSHOT_RATE 1 /* we take a snapshot after every SNAPSHOT_RATE events */
-#define TOTAL_BACTERIA_NUM 1 /* Total number of emerin monomer proteins */
-#define NUM_CELLS_ONESIDE 5 /* number of lattice cells along one side of square system domain */
+#define NUM_CELLS_ONESIDE 50 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
+#define TOTAL_BACTERIA_NUM 200 /* Total number of emerin monomer proteins */
 #define N0 (TOTAL_BACTERIA_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
-#define V (40.0*40.0*40) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
+#define V (6.0*6.0*6.0) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
 #define LATTICE_CELL_LENGTH 1.0 /* lattice cell length (=1 micrometer/SCALE)*/
-#define TAU_TRAPPED (0.9/2.0)/* time between hops inside nanodomain (s) */
+#define TAU_TRAPPED (0.5/2.0)/* time between hops inside nanodomain (s) */
 #define TAU_HOP 0.0 /* time between hops outside nanodomain (s) */
-#define SCALE 100.0
+#define SCALE 1 
 #define COORDF 1.0
-#define HOP_AVG (2.79*SCALE)
-#define TIME_MAX 600.0
-#define ITER_MAX 100000
+#define HOP_AVG (3.24*SCALE)
+#define TIME_MAX 20.0
+#define ITER_MAX 1
 #define DIM 3
 
 int main() {
@@ -130,8 +130,6 @@ int main() {
     }
   }
 
-srand(time(NULL));
-
 // printf("0\t0\t0\t0\t0\n");
 for (int iter=0; iter < ITER_MAX; iter++){
   x = 0;
@@ -155,6 +153,8 @@ for (int iter=0; iter < ITER_MAX; iter++){
       N[i] =  0;
   }
   N[TOTAL_LATTICE_CELLS/2 + NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE/2 + NUM_CELLS_ONESIDE/2] = TOTAL_BACTERIA_NUM;
+
+  // srand(time(NULL));
   for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
       u1 = (double)rand() / RAND_MAX;
       u2 = (double)rand() / RAND_MAX;
@@ -182,36 +182,44 @@ for (int iter=0; iter < ITER_MAX; iter++){
     // if(hop < 1){
     //   hop = 1;
     // }
-    switch(directionID){
-      case 0 :
-        y = y+hop;
-        break;
-      case 1 :
-        x = x+hop;
-        break;
-      case 2 :
-        y = y-hop;
-        break;
-      case 3 :
-        x = x-hop;
-        break;
-      case 4 :
-        z = z+hop;
-        break;
-      case 5 :
-        z = z-hop;
-        break;
-    }
     // printf("%d\t%d\t%d\t%d\t%f\n",pt+1,x,y,z,t[0]);
 
     /* grab the index of the lattice cell where the next event will occur */
     lambda = Q[0];
     gamma = lambda;
+
+    switch(directionID){
+      case 0 :
+        y = y+hop;
+        // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,0,hop,0,t[0],lambda);
+        break;
+      case 1 :
+        x = x+hop;
+        // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,hop,0,0,t[0],lambda);
+        break;
+      case 2 :
+        y = y-hop;
+        // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,0,-hop,0,t[0],lambda);
+        break;
+      case 3 :
+        x = x-hop;
+        // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,-hop,0,0,t[0],lambda);
+        break;
+      case 4 :
+        z = z+hop;
+        // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,0,0,hop,t[0],lambda);
+        break;
+      case 5 :
+        z = z-hop;
+        // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,0,0,-hop,t[0],lambda);
+        break;
+    }
+
     /* grab the index of the lattice cell the protein hops into */
     for(int i = 0; i <hop; i++){
       gamma = nn[gamma][directionID];
     }
-
+    printf("%d\t%d\t%f\n",lambda,gamma,t[0]);
     if(pt%SNAPSHOT_RATE == 0){ /* this is the snapshot conditional statement
                                where we print a snapshot of the system */
       /* we keep track of the concentration of proteins in the nanodomain
@@ -292,10 +300,11 @@ for (int iter=0; iter < ITER_MAX; iter++){
       /* we keep track of the concentration of proteins in the nanodomain
          Nin/Ntot as a function of simulation time t[0] */
       // printf("%d\t%f\t%d\n",pt,t[0],hop);
-    printf("%d\t%f\n",iter,DAVG);
+    // printf("%d\t%f\n",iter,DAVG);
   }
 }
-printf("%f",DAVG);
+// printf("%f",DAVG);
+printf("%d\t%d\t%f\n",TOTAL_LATTICE_CELLS,SCALE,TIME_MAX);
 
   
   return 0;
