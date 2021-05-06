@@ -30,7 +30,7 @@ USAGE
 #define LATTICE_CELL_LENGTH 10.0 /* lattice cell length (nm)*/
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN) /* time between hops inside nanodomain (W) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (W) */
-#define TIME_MAX 100.0
+#define TIME_MAX 300.0
 #define SCALE 1 
 #define DIM 2
 #define LETTERS_CELL_NUM 146
@@ -106,14 +106,14 @@ int main() {
     Q[i] = i; /* to be sorted by their order of event occurrence later */
   }
  
-  // for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
-  //     for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
-  //         tau[j + i*NUM_CELLS_ONESIDE] = TAU_IN;      
-  //     }
-  // }
-    for(int i=0; i<LETTERS_CELL_NUM; i++){ /* Now we switch in hop times inside nanodomain */
-      tau[Letters[i]] = TAU_IN;
+  for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+      for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
+          tau[j + i*NUM_CELLS_ONESIDE] = TAU_IN;      
+      }
   }
+  //   for(int i=0; i<LETTERS_CELL_NUM; i++){ /* Now we switch in hop times inside nanodomain */
+  //     tau[Letters[i]] = TAU_IN;
+  // }
   
   /* filling indexes of lattice cells into an array 
      which is padded on all sides to reflect the
@@ -150,9 +150,9 @@ int main() {
     }
   }
 for(int i = 0; i < TOTAL_LATTICE_CELLS; i++){
-  N[i] = 0;
+  N[i] = N0;
 }
-N[20] = TOTAL_PROTEIN_NUM;
+// N[20] = TOTAL_PROTEIN_NUM;
 // for(int i = 0; i < TOTAL_PROTEIN_NUM; i++){
 //   N[i] = 1;
 // }
@@ -173,14 +173,9 @@ N[20] = TOTAL_PROTEIN_NUM;
   /* Now we sum up the number of proteins in the nanodomain
      and calculate the total number of proteins outside the
      nanodomain */
-  // for(int i=0; i<NCPS; i++) {
-  //     for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
-  //         Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];        
-  //     }
+  // for(int i=0; i<LETTERS_CELL_NUM; i++) {
+  //   Nin = Nin + N[Letters[i]];
   // }
-  for(int i=0; i<LETTERS_CELL_NUM; i++) {
-    Nin = Nin + N[Letters[i]];
-  }
 
   build_min_heap(Q, t, TOTAL_LATTICE_CELLS); /* create priority queue as a binary min heap 
                               organized by the time of the event in each
@@ -252,14 +247,14 @@ N[20] = TOTAL_PROTEIN_NUM;
     for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
       Ntot = Ntot + N[i];
     }
-    // for(int i=0; i<NCPS; i++){
-    //   for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
-    //       Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];        
-    //   }
-    // } 
-    for(int i=0; i<LETTERS_CELL_NUM; i++){
-      Nin = Nin + N[Letters[i]];
+    for(int i=0; i<NCPS; i++){
+      for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
+          Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];        
+      }
     } 
+    // for(int i=0; i<LETTERS_CELL_NUM; i++){
+    //   Nin = Nin + N[Letters[i]];
+    // } 
     
     pt = pt+1; /* increment event id */
   } /* end of while loop after TIME_MAX */
