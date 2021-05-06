@@ -83,7 +83,7 @@ for step = 1:(length(simT)-1)
     N(Receiver(step)) = N(Receiver(step)) + 1;
 %     pause((simT(i+1)-simT(i))/100);
     Positions(k(ChosenOne),:) = LatticeCoords(Receiver(step),:) + (-L/2 + (L/2 + L/2)*rand(1,2));
-    if mod(step,1000) == 0    
+    if mod(step,2000) == 0    
         set(hp,'XData',Positions(:,1),'YData',Positions(:,2));
         snapiter = snapiter + 1;
         drawnow;
