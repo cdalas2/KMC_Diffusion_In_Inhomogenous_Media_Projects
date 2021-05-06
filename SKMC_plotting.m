@@ -65,8 +65,9 @@ hold on
 set(gca,'XColor', 'none','YColor','none')
 aa = sqrt(K) * L/2;
 set(gca, 'XLim', [-aa aa], 'YLim', [-aa aa]);
-set(gca,'Color','none');
-hp=plot(Positions(:,1),Positions(:,2),'b.','MarkerSize',30);
+set(gca,'Color',[153 27 30]/255);
+hp=plot(Positions(:,1),Positions(:,2),'.','MarkerSize',30,'MarkerEdgeColor',[255,204,0]/255,...
+    'MarkerFaceColor',[255,204,0]/255);
 v = VideoWriter('USCPHYS2');
 v.Quality = 95;
 open(v);
