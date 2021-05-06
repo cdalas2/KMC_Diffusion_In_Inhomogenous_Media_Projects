@@ -31,3 +31,68 @@ for(i = 0:40)
 end
 hold off
     
+
+clear all
+clc
+PositionsData = load("USCPHYS.o");
+Sender = PositionsData(1:end-1,1)+1;
+Receiver = PositionsData(1:end-1,2)+1;
+rho = PositionsData(1:end-1,3);
+simT = PositionsData(1:end-1,4);
+K = PositionsData(end,1);
+
+% N = ones(K,1);
+N = zeros(K,1); N(1:K) = 1;
+
+
+LCELLS_PER_LENGTH_SCALE = PositionsData(end,2);
+TIME_MAX = PositionsData(end,4);
+LENGTH_SCALE = 10; %1 micrometer
+L = LENGTH_SCALE/LCELLS_PER_LENGTH_SCALE;
+LatticeCoords = InitializePositionsSquare(1600,10);
+%Positions = LatticeCoords;
+for i = 1:K
+    Positions(i,:)= LatticeCoords(i,:) + (-L/2 + (L/2 + L/2)*rand(1,2));
+end
+ParticleLocation = 1:K;
+% ParticleLocation = ones(N(Sender(1)),1)*Sender(1);
+close all
+
+
+figure(34)
+hold on
+xlabel('$x$ ($\mu$m)','interpreter','latex','fontsize',19);
+ylabel('$y$ ($\mu$m)','interpreter','latex','fontsize',19);
+zlabel('$z$ ($\mu$m)','interpreter','latex','fontsize',19);
+
+aa = sqrt(K) * L/2;
+set(gca, 'XLim', [-aa aa], 'YLim', [-aa aa]);
+set(gca,'Color','none');
+hp=plot(Positions(:,1),Positions(:,2),'b.','MarkerSize',30);
+v = VideoWriter('USCPHYS');
+v.Quality = 95;
+open(v);
+M(1) = getframe(gcf);
+writeVideo(v,M(1));
+snapiter = 0;
+for step = 1:(length(simT)-1)
+    ChosenOne = randi(N(Sender(step)));
+    k = find(ParticleLocation == Sender(step),N(Sender(step)));
+    ParticleLocation(k(ChosenOne)) = Receiver(step);
+    N(Sender(step)) = N(Sender(step)) - 1;
+    N(Receiver(step)) = N(Receiver(step)) + 1;
+%     pause((simT(i+1)-simT(i))/100);
+    Positions(k(ChosenOne),:) = LatticeCoords(Receiver(step),:) + (-L/2 + (L/2 + L/2)*rand(1,2));
+    if mod(step,1000) == 0    
+        set(hp,'XData',Positions(:,1),'YData',Positions(:,2));
+        snapiter = snapiter + 1;
+        drawnow;
+        simT(step+1)
+        M(snapiter) = getframe(gcf);
+        writeVideo(v,M(snapiter));
+    end
+end
+close(v);
+movie(M);
+hold off
+

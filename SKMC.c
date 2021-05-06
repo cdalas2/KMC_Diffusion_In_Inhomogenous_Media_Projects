@@ -22,6 +22,7 @@ USAGE
 #define N0 (TOTAL_PROTEIN_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
 #define D_IN 250.0 /* Diffusion coefficient inside nanodomain (nanometers^2/W) */
 #define D_OUT 3500.0 /* Diffusion coefficient outside nanodomain (nanometers^2/W) */
+
 #define A_IN 12100.0 /* Area of nanodomain (nm^2) */
 #define NCPS 11 /* number of lattice cells per side of square nanodomain */
 #define A (400.0*400.0) /* Total area of system domain (nm^2) */
@@ -29,7 +30,10 @@ USAGE
 #define LATTICE_CELL_LENGTH 10.0 /* lattice cell length (nm)*/
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN) /* time between hops inside nanodomain (W) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (W) */
-#define TIME_MAX 14500.0
+#define TIME_MAX 110.0
+#define SCALE 1 
+#define DIM 2
+#define LETTERS_CELL_NUM 146
 
 int main() {
   /* directionID will hold lattice neighbor index protein hops into */
@@ -59,6 +63,40 @@ int main() {
                            periodic boundary conditions */
   int Q[TOTAL_LATTICE_CELLS]; /* will hold indexes of the lattice cells organized by their 
                their order in the event queue */
+  int Letters[LETTERS_CELL_NUM];
+
+  Letters[0] = 369; Letters[1] =373; Letters[2] =377; Letters[3] =378; Letters[4] =379; Letters[5] =380; Letters[6] =381; 
+  Letters[7] =385; Letters[8] = 386; Letters[9] =387; Letters[10] =388; Letters[11] =389;
+  Letters[12] =409; Letters[13] =413; Letters[14] =417; Letters[15] =421; Letters[16] =425; Letters[17] =429;
+  Letters[18] =449; Letters[19] =453; Letters[20] =457; Letters[21] =465; Letters[22] =469;
+  Letters[23] =489; Letters[24] =493; Letters[25] =497; Letters[26] =505;
+  Letters[27] =529; Letters[28] =533; Letters[29] =537; Letters[30] =538; Letters[31] =539; Letters[32] =540; Letters[33] =541;
+  Letters[34] = 545;
+  Letters[35] =569; Letters[36] =573; Letters[37] =581; Letters[38] =585;
+  Letters[39] =609; Letters[40] =613; Letters[41] =621; Letters[42] =625; Letters[43] =629;
+  Letters[44] =649; Letters[45] =653; Letters[46] =657; Letters[47] =661; Letters[48] =665; Letters[49] =669;
+  Letters[50] =689; Letters[51] =690; Letters[52] =691; Letters[53] =692; Letters[54] =693; Letters[55] =697;
+  Letters[56] = 698; Letters[57] =699; Letters[58] =700; Letters[59] =701; Letters[60] =705; Letters[61] =706;
+  Letters[62] = 707; Letters[63] =708; Letters[64] =709;
+
+  Letters[65] =845; Letters[66] =846; Letters[67] =847; Letters[68] =848; Letters[69] =849; Letters[70] =853;
+  Letters[71] = 857; Letters[72] =861; Letters[73] =865; Letters[74] =869; Letters[75] =870; Letters[76] =871;
+  Letters[77] =872; Letters[78] =873; 
+  Letters[79] =885; Letters[80] =889; Letters[81] =893; Letters[82] =897; Letters[83] =901; Letters[84] =905; Letters[85] =909;
+  Letters[144] =913;
+  Letters[86] =925; Letters[87] =929; Letters[88] =933; Letters[89] =937; Letters[90] =941; Letters[91] =945; Letters[92] =949;
+  Letters[93] =965; Letters[94] =969; Letters[95] =973; Letters[96] =977; Letters[97] =981; Letters[98] =985; Letters[99] =989;
+  Letters[100] =1005; Letters[101] =1006; Letters[102] =1007; Letters[103] =1008; Letters[104] =1009; Letters[105] =1013;
+  Letters[106] =1014; Letters[107] =1015; Letters[108] =1016; Letters[109] =1017; Letters[110] =1021; Letters[111] =1022;
+  Letters[112] = 1023; Letters[113] =1024; Letters[114] =1025; Letters[115] =1029; Letters[116] =1030; Letters[117] =1031; 
+  Letters[118] =1032; Letters[119] =1033;
+  Letters[120] =1045; Letters[121] =1053; Letters[122] =1057; Letters[123] =1063; Letters[124] =1073;
+  Letters[125] =1085; Letters[126] =1093; Letters[127] =1097; Letters[128] =1103; Letters[129] =1113;
+  Letters[130] =1125; Letters[131] =1133; Letters[132] =1137; Letters[133] =1143; 
+  Letters[145] =1149;
+  Letters[134] =1153;
+  Letters[135] =1165; Letters[136] =1173; Letters[137] =1177; Letters[138] =1183; Letters[139] =1189;
+  Letters[140] = 1190; Letters[141] =1191; Letters[142] =1192; Letters[143] =1193; 
   
   /* Assign the time between hops in each lattice cell.
      Our nanodomain is square with top left corner at
@@ -68,10 +106,13 @@ int main() {
     Q[i] = i; /* to be sorted by their order of event occurrence later */
   }
  
-  for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
-      for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
-          tau[j + i*NUM_CELLS_ONESIDE] = TAU_IN;      
-      }
+  // for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+  //     for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
+  //         tau[j + i*NUM_CELLS_ONESIDE] = TAU_IN;      
+  //     }
+  // }
+    for(int i=0; i<LETTERS_CELL_NUM; i++){ /* Now we switch in hop times inside nanodomain */
+      tau[Letters[i]] = TAU_IN;
   }
   
   /* filling indexes of lattice cells into an array 
@@ -108,7 +149,12 @@ int main() {
         nn[i*NUM_CELLS_ONESIDE + j][3] = LCells2D[i+1][j]; /* left */
     }
   }
-
+for(int i = 0; i < TOTAL_LATTICE_CELLS; i++){
+  N[i] = N0;
+}
+// for(int i = 0; i < TOTAL_PROTEIN_NUM; i++){
+//   N[i] = 1;
+// }
   /* We initialize a uniform distribution of emerin monomer
      proteins over the lattice cells and calculate
      the transition rates for the subvolume KMC method. 
@@ -117,7 +163,6 @@ int main() {
      of the total number of proteins Ntot to make sure its constant */
   srand(time(NULL));
   for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
-      N[i] =  N0;
       W[i] = (double)N[i]/tau[i]/4; 
       u1 = (double)rand() / RAND_MAX;
       t[i] = -log(u1) / W[i];
@@ -127,10 +172,13 @@ int main() {
   /* Now we sum up the number of proteins in the nanodomain
      and calculate the total number of proteins outside the
      nanodomain */
-  for(int i=0; i<NCPS; i++) {
-      for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
-          Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];        
-      }
+  // for(int i=0; i<NCPS; i++) {
+  //     for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
+  //         Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];        
+  //     }
+  // }
+  for(int i=0; i<LETTERS_CELL_NUM; i++) {
+    Nin = Nin + N[Letters[i]];
   }
 
   build_min_heap(Q, t, TOTAL_LATTICE_CELLS); /* create priority queue as a binary min heap 
@@ -151,7 +199,7 @@ int main() {
                                where we print a snapshot of the system */
       /* we keep track of the concentration of proteins in the nanodomain
          Nin/Ntot as a function of simulation time t[0] */
-      printf("%f\t%f\n",(double)Nin/Ntot,t[0]);
+      printf("%d\t%d\t%f\t%f\n",lambda,gamma,(double)Nin/Ntot,t[0]);
     }
     /* 1 protein hops out of lattice cell lambda */
     N[lambda] = N[lambda] - 1;
@@ -203,14 +251,18 @@ int main() {
     for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
       Ntot = Ntot + N[i];
     }
-    for(int i=0; i<NCPS; i++){
-      for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
-          Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];        
-      }
+    // for(int i=0; i<NCPS; i++){
+    //   for(int j=(23+20*NUM_CELLS_ONESIDE); j<(23+20*NUM_CELLS_ONESIDE+NCPS); j++){
+    //       Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];        
+    //   }
+    // } 
+    for(int i=0; i<LETTERS_CELL_NUM; i++){
+      Nin = Nin + N[Letters[i]];
     } 
+    
     pt = pt+1; /* increment event id */
   } /* end of while loop after TIME_MAX */
-   printf("\n");
+   printf("%d\t%d\t%f\t%f\n",TOTAL_LATTICE_CELLS,SCALE,0.0,TIME_MAX);
   
   return 0;
 }
