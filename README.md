@@ -1,4 +1,4 @@
-![Uploading USCPHYSGIF_3SEC.gif…]()
+![USCPHYSGIF_3SEC](https://user-images.githubusercontent.com/62254347/117326301-6166c180-ae46-11eb-9960-ef1b2d71779f.gif)
 
 https://user-images.githubusercontent.com/62254347/117265810-7709c600-ae09-11eb-9593-b067d9f6580d.mp4
 
