@@ -1,3 +1,4 @@
+![Uploading USCPHYSGIF_3SEC.gif…]()
 
 https://user-images.githubusercontent.com/62254347/117265810-7709c600-ae09-11eb-9593-b067d9f6580d.mp4
 
