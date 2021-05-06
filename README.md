@@ -1,12 +1,11 @@
 # PHYS516FINAL
-https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-8b3e-be868e8ae310.mp4
+> We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
 
+https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-8b3e-be868e8ae310.mp4
+> This video is of a non-interacting bacteria population diffusing through pores of characteristic size 3.24 &mu;m with measurement taken from [4], where we initialized the simulation with the entire population of bacteria in one cell, as to simulate the population emerging from a pipette or syringe; periodic boundary conditions are enforced at the boundaries of the domain volume. The simulated time was 20s, but the video is slowed to 99s.
 
 https://user-images.githubusercontent.com/62254347/116847393-47f01c00-ab9f-11eb-92a6-7ece68e53c37.mp4
-
-> We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
-> 
-> The 1st video is of a non-interacting bacteria population diffusing through pores of characteristic size 3.24 &mu;m with measurement taken from [4], where we initialized the simulation with the entire population of bacteria in one cell, as to simulate the population emerging from a pipette or syringe; periodic boundary conditions are enforced at the boundaries of the domain volume. The simulated time was 20s, but the video is slowed to 99s. In the 2nd video, we show the random walk of a single bacteria through a pore space with pores of characteristic size 3.6 &mu;m and using measurments from [4]. Here we show its diffusion without periodic boundary conditions but in an infinite domain. The simulation time is 10-minutes, though the video, here, has been condensed to 27s.
+> In this video, we show the random walk of a single bacteria through a pore space with pores of characteristic size 3.6 &mu;m and using measurments from [4]. Here we show its diffusion without periodic boundary conditions but in an infinite domain. The simulation time is 10-minutes, though the video, here, has been condensed to 27s.
 
 ---
 
@@ -45,9 +44,9 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 #### SKMC Simulation Steps
 1. Domain patch is divided into *K* lattice cells.
 2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
-                        Each lattice cell is assigned a wait time between hops, *&tau;*, depending on its domain type.
+                        Each lattice cell is assigned an average wait time between hops, *&tau;*, depending on its domain type.
                         Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Assign event times to each lattice cell using random numbers and the transition rates. Only one particle 
+                        Sample event times for each lattice cell using random numbers and the transition rates. Only one particle 
                         hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
 3. Sort lattice cells by their event time in a binary min heap. 
 4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
@@ -78,7 +77,7 @@ It is also interesting that this simple model which could be characterized by a 
 
 ## 2. Bacteria Hopping And Trapping
 https://user-images.githubusercontent.com/62254347/116849027-bbdff380-aba2-11eb-941d-144c1c617acd.mp4
-
+>This video is the same simulation as the second video at the top, but with a black background and without the trajectory line.
 
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a an alteration of the subvolume KMC method. PROJECT NOTES---> <img src="KMC_Bacteria_Hopping_And_Trapping.pdf ">
 
