@@ -30,7 +30,7 @@ USAGE
 #define LATTICE_CELL_LENGTH 10.0 /* lattice cell length (nm)*/
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN) /* time between hops inside nanodomain (W) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (W) */
-#define TIME_MAX 110.0
+#define TIME_MAX 100.0
 #define SCALE 1 
 #define DIM 2
 #define LETTERS_CELL_NUM 146
@@ -150,8 +150,9 @@ int main() {
     }
   }
 for(int i = 0; i < TOTAL_LATTICE_CELLS; i++){
-  N[i] = N0;
+  N[i] = 0;
 }
+N[20] = TOTAL_PROTEIN_NUM;
 // for(int i = 0; i < TOTAL_PROTEIN_NUM; i++){
 //   N[i] = 1;
 // }
