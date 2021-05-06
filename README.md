@@ -76,6 +76,7 @@ It is also interesting that this simple model which could be characterized by a 
 ## 2. Bacteria Hopping And Trapping
 https://user-images.githubusercontent.com/62254347/116847393-47f01c00-ab9f-11eb-92a6-7ece68e53c37.mp4
 > In this video, we show the random walk of a single bacteria through a pore space with pores of characteristic size 3.6 &mu;m and using measurments from [4]. Here we show its diffusion without periodic boundary conditions but in an infinite domain. The simulation time is 10-minutes, though the video, here, has been condensed to 27s.
+
 https://user-images.githubusercontent.com/62254347/116849027-bbdff380-aba2-11eb-941d-144c1c617acd.mp4
 >This video is the same simulation as the previous video, but with a black background and without the trajectory line.
 
