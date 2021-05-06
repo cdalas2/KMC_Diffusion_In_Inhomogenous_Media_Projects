@@ -1,4 +1,4 @@
-![USCPHYSGIF_3SEC](https://user-images.githubusercontent.com/62254347/117326301-6166c180-ae46-11eb-9960-ef1b2d71779f.gif)
+![USCPHYS](https://user-images.githubusercontent.com/62254347/117349003-bcf17900-ae5f-11eb-9f3b-d0ceb8e59e50.gif)
 # PHYS516FINAL
 > We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
 
