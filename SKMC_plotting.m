@@ -92,6 +92,7 @@ for step = 1:(length(simT)-1)
         writeVideo(v,M(snapiter));
     end
 end
+
 close(v);
 % movie(M);
 hold off
