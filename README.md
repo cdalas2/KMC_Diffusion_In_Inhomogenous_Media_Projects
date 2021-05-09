@@ -49,13 +49,14 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
                         Each lattice cell is assigned an average wait time between hops, *&tau;*, depending on its domain type.
                         Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
-                        Sample event times for each lattice cell using random numbers and the transition rates. Only one particle 
-                        hop is simulated at each iteration and so the system of particles is evolved 1 hop at a time.
+                        Sample event times from a Poisson distribution fitted to the mean hop time in each lattice cell using random 
+                        numbers and the transition rates. Only one particle hop is simulated at each iteration and so the system of
+                        particles is evolved 1 hop at a time.
 3. Sort lattice cells by their event time in a binary min heap. 
 4. Pick the lattice cell at the top of the minheap for the particle to hop out of.
 5. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
 6. Update lattice info of lattice cells involved in the particle exchange.
-7. Calculate new event times using random numbers for the lattice cells involved.
+7. Sample new event times for the lattice cells involved.
 8. Re-sort the binary heap if necessary.
 9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
@@ -150,7 +151,7 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which includes int
    cell at the top of the minheap for the particle to hop out of.
 7. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
 8. Update lattice info of lattice cells involved in the particle exchange.
-9. Calculate new event times using random numbers for the lattice cells involved.
+9. Sample new event times for the lattice cells involved.
 10. Re-sort the binary heap if necessary.
 11. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
