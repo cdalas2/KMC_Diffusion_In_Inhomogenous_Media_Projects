@@ -134,6 +134,12 @@ It has been observed that some bacteria will cluster to swim faster. We can mode
 ### Results Of Bacteria Bus Ride Simulations
 
 ### References For Bacteria Bus Ride Scenario
+[7] Mittal, N., Budrene, E. O., Brenner, M. P., & van Oudenaarden, A. (2003). Motility of Escherichia coli cells in clusters formed by chemotactic aggregation. Proceedings of the National Academy of Sciences, 100(23), 13259–13263. https://doi.org/10.1073/pnas.2233626100
+
+[8] Darnton, N. C., Turner, L., Rojevsky, S., & Berg, H. C. (2010). Dynamics of Bacterial Swarming. Biophysical Journal, 98(10), 2082–2090.           https://doi.org/10.1016/j.bpj.2010.01.053
+
+[9] Tung, C., Lin, C., Harvey, B., Fiore, A. G., Ardon, F., Wu, M., & Suarez, S. S. (2017). Fluid viscoelasticity promotes collective swimming of sperm. Scientific Reports, 7(1). https://doi.org/10.1038/s41598-017-03341-4
+
 
 
 [Back To The Top](#PHYS516FINAL)
