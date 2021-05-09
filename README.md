@@ -104,7 +104,7 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the 
 7. Update lattice info of lattice cells involved in the particle exchange.
 8. Assign new event times using the new occupation numbers and new sampled trapped times for the lattice cells involved.
 9. Re-sort the binary heap if necessary.
-10. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
+10. Repeat steps 4-9 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Hopping And Trapping Simulations
 We ran 10-minute simulations of a single bacteria transitioning between trapped states in a domain volume. We ran the simulation 100000 times, averaging over the diffusion coefficient as a function of iterations; this is shown in the figure on the left. We compared our simulated diffusion coefficients average over 100000 iterations against the measured coefficients of [4] for pore distributions with characteristic pore sizes 3.6, 2.5, and 1.9 &mu;m in the figure on the right. We found that the measured diffusivities of the experiments in [4] are about (0.9+-0.1) times our simulated diffusivities averaged over 100000 10-minute iterations. The measured diffusivities in [4] are reported to the nearest 0.5 &mu;m^2/s and so our simulated values for pores of sizes 1.9 &mu;m and 2.5 &mu;m agree quite well for this level of precision in the measured values. Our simulated diffusivity for pores of size 3.6 &mu;m is closer to 2.5 &mu;m^2/s than the reported measured value of about 2 &mu;m^2/s, which we attribute to the bacteria spending less time trapped and more time hopping. Since our model assumes the hopping time to be negligible, we always underestimate the transition times and so our simulated values always overestimate the measured diffusivities.
@@ -128,6 +128,29 @@ We ran 10-minute simulations of a single bacteria transitioning between trapped 
 It has been observed that some bacteria will cluster to swim faster. We can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again. Perhaps our model will yield the bacteria clustering phenomenon similar to the static nanodomain case of protein clustering.
 
 ### Subvolume Kinetic Monte Carlo With Translating Microdomains
+1. Domain volume is divided into *K* lattice cells.
+2. Assign lattice info: System start state is *M* particles uniformly distributed along all cells; so *N=M/K* particles in each cell.
+                        Each lattice cell is assigned an average wait time between hops, *&tau;*, depending on its domain type.
+                        Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
+                        Sample event times for each lattice cell using random numbers and the transition rates.
+3. Sort lattice cells by their event time in a binary min heap. 
+4. The microdomain is of constant shape and translates 1 unit cell per second to the right, always. 
+   So we check if its time to translate the microdomain by comparing 1 sec intervals to the next active cell's event time.
+   If this event time crosses over into the next 1 sec interval, we translate the microdomain and the particles inside before the next 
+   diffusive particle hop.
+5. If its time to translate the microdomain, we shift over the occupancy numbers of the lattice cells in the microdomain over one 
+   column to the right. If the lattice cells that are added to the front of the microdomain have particles, they are added to the 
+   lattice cells at the front of the microdomain and these receiving lattice cells event times are re-sampled to occur after the 
+   microdomain's translation. Like the particles, the event times are shifted to the right as well, and the lattice cells
+   left behind by the microdomain have their event times re-sampled to occur after the microdomain's translation. The min heap is
+   re-sorted if necessary and step 4 is repeated.
+6. If it is not time to translate the microdomain, we proceed as we would with a non-translating microdomain. We pick the lattice 
+   cell at the top of the minheap for the particle to hop out of.
+7. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
+8. Update lattice info of lattice cells involved in the particle exchange.
+9. Calculate new event times using random numbers for the lattice cells involved.
+10. Re-sort the binary heap if necessary.
+11. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
 #### SKMCTM Simulation Steps
 
