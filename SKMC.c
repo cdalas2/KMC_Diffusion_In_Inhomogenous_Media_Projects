@@ -5,8 +5,8 @@ of the emerin proteins there
 
 USAGE
 
-%cc -O3 KMC.c -o KMC
-%./KMC > KMC.out
+%cc -O3 SKMC.c -o SKMC
+%./SKMC > SKMC.out
 *******************************************************************************/
 
 #include <stdio.h>

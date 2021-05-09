@@ -1,11 +1,12 @@
 /*******************************************************************************
-Subvolume KMC Simulations of freely diffusing bacteria in a 3D porous media which
-causes it to exhibit a two state motion of hopping and trapping.
+Subvolume KMC Simulations of freely diffusing monomer emerin proteins in
+a domain with a nanodomain of a different diffusion rate due to the clustering
+of the emerin proteins there
 
 USAGE
 
-%cc -O3 SKMCHT3D.c -o SKMCHT3D
-%./SKMCHT3D > SKMCHT3D.out
+%cc -O3 SKMCTM3D.c -o SKMCTM3D
+%./SKMCTM3D > SKMCTM3D.out
 *******************************************************************************/
 
 #include <stdio.h>
@@ -22,35 +23,30 @@ USAGE
 #define V (6.0*6.0*6.0) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
 #define LATTICE_CELL_LENGTH 1.0 /* lattice cell length (=1 micrometer/SCALE)*/
 #define TAU_TRAPPED (0.5/2.0)/* time between hops inside nanodomain (s) */
-#define TAU_HOP 0.0 /* time between hops outside nanodomain (s). we set to zero since none were reported in the experiments. */
-#define SCALE 1 /*re-scales the size of the lattice cells */
-#define HOP_AVG (3.24*SCALE) /*average hop length */
-#define TIME_MAX 20.0 /*simulation time limit */
-#define ITER_MAX 1 /*number of iterations of the simulation */
-#define DIM 3 /* Our domain is 3D */
+#define TAU_HOP 0.0 /* time between hops outside nanodomain (s) */
+#define SCALE 1 
+#define COORDF 1.0
+#define HOP_AVG (3.24*SCALE)
+#define TIME_MAX 20.0
+#define ITER_MAX 1
+#define DIM 3
 
 int main() {
   /* directionID will hold lattice neighbor index protein hops into */
   /* lambda will hold the index of the lattice site index it hops out of */
   /* gamma will hold the index of the lattice site index it hops into */
-  /* hop will hold sampled hop length */
-  /* x,y,z will hold coordinates of the bacteria as it travels from trapped state to trapped state (for 1 bacteria simulation) */
-  /* u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u11 are to hold randoms numbers */
-  /* tt will hold sampled trapped time */
-  /* th will hold sampled hop time */
-  /* D will hold the measured simulated diffusivity */
+  /* u1,u2,u3,u4 are to hold randoms numbers */
   int directionID, lambda, gamma, u4, hop, y, x, z;
   double u1, u2, u3, u5, u6, u7, u8, u9, u10, u11, tt, th, D;
 
-  /* Ntot is for the total number of proteins across 
+  /* Nin is for the number of proteins inside the nanodomain
+     and Ntot is for the total number of proteins across 
      all lattice cells */
   int Ntot = 0;
 
   /* tlambda will hold the sampled event time in lattice lambda */
   /* tgamma will hold the sampled event time in lattice gamma */
-  /* Dsum will hold the diffusivities summed over iterations for averaging in later step */
-  /* Davg will hold the diffusivity averaged over iterations */
-  double tlambda = 0.0, tgamma = 0.0, Dsum = 0.0, Davg = 0.0;
+  double tlambda = 0.0, tgamma = 0.0, DAVG = 0.0, DSUM = 0.0;
 
   int N[TOTAL_LATTICE_CELLS]; /* number of emerin monomer proteins in each lattice cell */
   int nn[TOTAL_LATTICE_CELLS][6]; /* nearest neighbors of each lattice cell, we use 
@@ -97,18 +93,22 @@ int main() {
   }
 
   /* fill corners with INFINITY since they are irrelevant */
+  /* fill corners with INFINITY since they are irrelevant */
   for(int k=0; k<NUM_CELLS_ONESIDE+2; k++){
     LCells3D[0][0][k] = INFINITY;
     LCells3D[0][NUM_CELLS_ONESIDE+1][k] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][0][k] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][NUM_CELLS_ONESIDE+1][k] = INFINITY;
   }
+
+    /* fill corners with INFINITY since they are irrelevant */
   for(int j=0; j<NUM_CELLS_ONESIDE+2; j++){
     LCells3D[0][j][0] = INFINITY;
     LCells3D[0][j][NUM_CELLS_ONESIDE+1] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][j][0] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][j][NUM_CELLS_ONESIDE+1] = INFINITY;
   }
+
   for(int i=0; i<NUM_CELLS_ONESIDE+2; i++){
     LCells3D[i][0][0] = INFINITY;
     LCells3D[i][0][NUM_CELLS_ONESIDE+1] = INFINITY;
@@ -131,7 +131,6 @@ int main() {
   }
 
 // printf("0\t0\t0\t0\t0\n");
-/*Loop for running the simulation many times */
 for (int iter=0; iter < ITER_MAX; iter++){
   x = 0;
   y = 0;
@@ -166,7 +165,7 @@ for (int iter=0; iter < ITER_MAX; iter++){
       W[i] = (double)N[i]/(tt+th)/(2*DIM);
       // W[i] = (double)N[i]/(tt)/4;
       // t[i] = -log(u3)/W[i];
-      t[i] = 1.0/W[i];
+      t[i] = COORDF/W[i];
       Ntot = Ntot + N[i];
   }
 
@@ -253,7 +252,7 @@ for (int iter=0; iter < ITER_MAX; iter++){
     /* assign random number to calculate new event time in lattice cell lambda */
     u10 = (double)rand() / RAND_MAX;
     // t[0] = tlambda - log(u10) / W[lambda];
-    t[0] = tlambda + 1.0/W[lambda];
+    t[0] = tlambda + COORDF/W[lambda];
 
     /* update order of the priority queue by percolating down the heap*/
     min_heapify(Q, t, 0, TOTAL_LATTICE_CELLS);
@@ -270,7 +269,7 @@ for (int iter=0; iter < ITER_MAX; iter++){
         /* assign random number to calculate new event time in lattice cell gamma */
         u11 = (double)rand() / RAND_MAX;
         // t[i] = tlambda - log(u11)/W[gamma];
-        t[i] = tlambda + 1.0/W[gamma];
+        t[i] = tlambda + COORDF/W[gamma];
         /* if new event time is less than old event time
            we use decrease to percolate up the heap */
         if(t[i] < tgamma) {
@@ -294,17 +293,17 @@ for (int iter=0; iter < ITER_MAX; iter++){
   D = (double)(x*x + y*y + z*z)/(2*DIM)/tlambda/TOTAL_BACTERIA_NUM/(SCALE*SCALE);
   //  printf("\n");
   //  printf("%f\n",D);
-  Dsum = Dsum + D;
-  Davg = Dsum/(iter+1);
+  DSUM = DSUM + D;
+  DAVG = DSUM/(iter+1);
   if(iter%SNAPSHOT_RATE == 0){ /* this is the snapshot conditional statement
                                where we print a snapshot of the system */
       /* we keep track of the concentration of proteins in the nanodomain
          Nin/Ntot as a function of simulation time t[0] */
       // printf("%d\t%f\t%d\n",pt,t[0],hop);
-    // printf("%d\t%f\n",iter,Davg);
+    // printf("%d\t%f\n",iter,DAVG);
   }
 }
-// printf("%f",Davg);
+// printf("%f",DAVG);
 printf("%d\t%d\t%f\n",TOTAL_LATTICE_CELLS,SCALE,TIME_MAX);
 
   

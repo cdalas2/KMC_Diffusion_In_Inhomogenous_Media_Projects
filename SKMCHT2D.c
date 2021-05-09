@@ -1,12 +1,12 @@
 /*******************************************************************************
-Subvolume KMC Simulations of freely diffusing monomer emerin proteins in
-a domain with a nanodomain of a different diffusion rate due to the clustering
-of the emerin proteins there
+Subvolume KMC Simulations of freely diffusing bacteria in a porous media which
+causes it to exhibit a two state motion of hopping and trapping. This code would
+be for bacteria in a thin porous film (2D).
 
 USAGE
 
-%cc -O3 KMCP2D.c -o KMCP2D
-%./KMCP2D > KMC.out
+%cc -O3 SKMCHT2D.c -o SKMCHT2D
+%./SKMCHT2D > SKMCHT2D.out
 *******************************************************************************/
 
 #include <stdio.h>
