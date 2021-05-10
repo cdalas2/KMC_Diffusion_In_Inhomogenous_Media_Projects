@@ -1,12 +1,11 @@
 /*******************************************************************************
-Subvolume KMC Simulations of freely diffusing monomer emerin proteins in
-a domain with a nanodomain of a different diffusion rate due to the clustering
-of the emerin proteins there
+Subvolume KMC Simulations of freely diffusing bacteria in a 3D porous media which
+causes it to exhibit a two state motion of hopping and trapping.
 
 USAGE
 
-%cc -O3 SKMCTM3D.c -o SKMCTM3D
-%./SKMCTM3D > SKMCTM3D.out
+%cc -O3 SKMCHT3D.c -o SKMCHT3D
+%./SKMCHT3D > SKMCHT3D.out
 *******************************************************************************/
 
 #include <stdio.h>
@@ -16,37 +15,42 @@ USAGE
 #include "minHeap.h"
 
 #define SNAPSHOT_RATE 1 /* we take a snapshot after every SNAPSHOT_RATE events */
-#define NUM_CELLS_ONESIDE 50 /* number of lattice cells along one side of square system domain */
+#define NUM_CELLS_ONESIDE 40 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
-#define TOTAL_BACTERIA_NUM 200 /* Total number of emerin monomer proteins */
+#define TOTAL_BACTERIA_NUM 1600 /* Total number of emerin monomer proteins */
 #define N0 (TOTAL_BACTERIA_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
+#define NCPS 11 /* number of lattice cells per side of square nanodomain */
 #define V (6.0*6.0*6.0) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
 #define LATTICE_CELL_LENGTH 1.0 /* lattice cell length (=1 micrometer/SCALE)*/
-#define TAU_TRAPPED (0.5/2.0)/* time between hops inside nanodomain (s) */
-#define TAU_HOP 0.0 /* time between hops outside nanodomain (s) */
-#define SCALE 1 
-#define COORDF 1.0
-#define HOP_AVG (3.24*SCALE)
-#define TIME_MAX 20.0
-#define ITER_MAX 1
-#define DIM 3
+#define TAU_IN 64.0/* time between hops inside nanodomain (s) */
+#define TAU_OUT 729.0 /* time between hops outside nanodomain (s). we set to zero since none were reported in the experiments. */
+#define SCALE 1 /*re-scales the size of the lattice cells */
+#define TIME_MAX 300.0 /*simulation time limit */
+#define ITER_MAX 1 /*number of iterations of the simulation */
+#define DIM 3 /* Our domain is 3D */
 
 int main() {
   /* directionID will hold lattice neighbor index protein hops into */
   /* lambda will hold the index of the lattice site index it hops out of */
   /* gamma will hold the index of the lattice site index it hops into */
-  /* u1,u2,u3,u4 are to hold randoms numbers */
+  /* hop will hold sampled hop length */
+  /* x,y,z will hold coordinates of the bacteria as it travels from trapped state to trapped state (for 1 bacteria simulation) */
+  /* u1,u2,u3,u4,u5,u6,u7,u8,u9,u10,u11 are to hold randoms numbers */
+  /* tt will hold sampled trapped time */
+  /* th will hold sampled hop time */
+  /* D will hold the measured simulated diffusivity */
   int directionID, lambda, gamma, u4, hop, y, x, z;
   double u1, u2, u3, u5, u6, u7, u8, u9, u10, u11, tt, th, D;
 
-  /* Nin is for the number of proteins inside the nanodomain
-     and Ntot is for the total number of proteins across 
+  /* Ntot is for the total number of proteins across 
      all lattice cells */
   int Ntot = 0;
 
   /* tlambda will hold the sampled event time in lattice lambda */
   /* tgamma will hold the sampled event time in lattice gamma */
-  double tlambda = 0.0, tgamma = 0.0, DAVG = 0.0, DSUM = 0.0;
+  /* Dsum will hold the diffusivities summed over iterations for averaging in later step */
+  /* Davg will hold the diffusivity averaged over iterations */
+  double tlambda = 0.0, tgamma = 0.0, Dsum = 0.0, Davg = 0.0;
 
   int N[TOTAL_LATTICE_CELLS]; /* number of emerin monomer proteins in each lattice cell */
   int nn[TOTAL_LATTICE_CELLS][6]; /* nearest neighbors of each lattice cell, we use 
@@ -93,22 +97,18 @@ int main() {
   }
 
   /* fill corners with INFINITY since they are irrelevant */
-  /* fill corners with INFINITY since they are irrelevant */
   for(int k=0; k<NUM_CELLS_ONESIDE+2; k++){
     LCells3D[0][0][k] = INFINITY;
     LCells3D[0][NUM_CELLS_ONESIDE+1][k] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][0][k] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][NUM_CELLS_ONESIDE+1][k] = INFINITY;
   }
-
-    /* fill corners with INFINITY since they are irrelevant */
   for(int j=0; j<NUM_CELLS_ONESIDE+2; j++){
     LCells3D[0][j][0] = INFINITY;
     LCells3D[0][j][NUM_CELLS_ONESIDE+1] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][j][0] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][j][NUM_CELLS_ONESIDE+1] = INFINITY;
   }
-
   for(int i=0; i<NUM_CELLS_ONESIDE+2; i++){
     LCells3D[i][0][0] = INFINITY;
     LCells3D[i][0][NUM_CELLS_ONESIDE+1] = INFINITY;
@@ -131,11 +131,22 @@ int main() {
   }
 
 // printf("0\t0\t0\t0\t0\n");
+/*Loop for running the simulation many times */
 for (int iter=0; iter < ITER_MAX; iter++){
   x = 0;
   y = 0;
   z = 0;
 
+  for(int i=0; i<TOTAL_LATTICE_CELLS; i++){ /* First we will set all times to TAU_OUT */
+    tau[i] = TAU_OUT;
+  }
+  for(int k=0; k<NCPS; k++){
+    for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+      for(int j=0; j<NCPS; j++){
+          tau[j + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] = TAU_IN;  
+      }
+    } 
+  }
     /* Assign the time between hops in each lattice cell.
      Our nanodomain is square with top left corner at
      lattice cell i = 23 + 20*NUM_CELLS_ONESIDE */
@@ -150,22 +161,15 @@ for (int iter=0; iter < ITER_MAX; iter++){
      probability distribution (master equation). We keep track
      of the total number of proteins Ntot to make sure its constant */ 
   for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
-      N[i] =  0;
+      N[i] =  N0;
   }
-  N[TOTAL_LATTICE_CELLS/2 + NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE/2 + NUM_CELLS_ONESIDE/2] = TOTAL_BACTERIA_NUM;
+  // N[TOTAL_LATTICE_CELLS/2 + NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE/2 + NUM_CELLS_ONESIDE/2] = TOTAL_BACTERIA_NUM;
 
-  // srand(time(NULL));
+  srand(time(NULL));
   for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
       u1 = (double)rand() / RAND_MAX;
-      u2 = (double)rand() / RAND_MAX;
-      u3 = (double)rand() / RAND_MAX;
-      tt = -TAU_TRAPPED*log(u1);
-    //   tt = pow(TAU_TRAPPED*u1,-2.0/3.0);
-      th = -TAU_HOP*log(u2);
-      W[i] = (double)N[i]/(tt+th)/(2*DIM);
-      // W[i] = (double)N[i]/(tt)/4;
-      // t[i] = -log(u3)/W[i];
-      t[i] = COORDF/W[i];
+      W[i] = (double)N[i]/tau[i]/(2*DIM);
+      t[i] = -log(u1)/W[i];
       Ntot = Ntot + N[i];
   }
 
@@ -173,8 +177,145 @@ for (int iter=0; iter < ITER_MAX; iter++){
                               organized by the time of the event in each
                               lattice cell */
   int pt = 0; /* event id */
+  int interval = 1;
+  int tr_flag[NCPS*NCPS];
+  double t_new = 0.0;
+  int SDBase = 0;
+  int nf;
   while(t[0] <= TIME_MAX){ /* we will run the simulation for 4 hours */
     /* assign random integer to picture direction to hop in */
+
+    if(t[0] < (double)interval){
+
+    }
+    else{
+      for(int k=0; k<NCPS; k++){
+        for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+          tau[SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] = TAU_OUT; 
+          for(int j=0; j<NCPS; j++){
+            nf = nn[SDBase][1];
+          }
+          tau[nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] = TAU_IN;  
+          if(N[nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] == 0){
+            tr_flag = 0;
+          }
+          else{
+            tr_flag = 1;
+
+          }
+          N[nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE]  = 
+            N[nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] + 
+            N[nf-1 + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE];
+
+          if(tr_flag == 0){
+            for(int j=0; j<TOTAL_LATTICE_CELLS; j++){
+              /* when lattice cell gamma is found in Q
+                  we update its event time */
+              if( Q[j] != (nf-1 + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) ){ 
+              }
+              else{
+                t_new = t[j];
+                break; /* break out of for loop once lattice cell gamma is found
+                        and priority queue is updated */
+              
+              }
+            }
+            for(int j=0; j<TOTAL_LATTICE_CELLS; j++){
+              if( Q[j] != (nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) ){ 
+              }
+              else{
+                /* save event time in lattice cell gamma for comparison */
+                if(t[j] < t_new) {
+                  t[j] = t_new;
+                  decrease_key(Q, t, j);
+                }
+                else if(t[j] > t_new) {/* if new event time is greater than old event time
+                                          we use heapify to percolate down the heap */
+                  t[j] = t_new;
+                  min_heapify(Q, t, j, TOTAL_LATTICE_CELLS);
+                }
+                break; /* break out of for loop once lattice cell gamma is found
+                          and priority queue is updated */
+              }
+            }
+          }
+          else{
+            for(int j=0; j<TOTAL_LATTICE_CELLS; j++){
+              if( Q[j] != (nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) ){ 
+              }
+              else{
+                W[nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] = 
+                  N[nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE]/
+                  tau[nf+ i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE];
+                /* assign random number to calculate new event time in lattice cell gamma */
+                u2 = (double)rand() / RAND_MAX;
+                // t[i] = tlambda - log(u11)/W[gamma];
+                t_new = (double)interval - log(u2)/
+                W[nf + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE];
+                /* save event time in lattice cell gamma for comparison */
+                if(t[j] < t_new) {
+                  t[j] = t_new;
+                  decrease_key(Q, t, j);
+                }
+                else if(t[j] > t_new) {/* if new event time is greater than old event time
+                                          we use heapify to percolate down the heap */
+                  t[j] = t_new;
+                  min_heapify(Q, t, j, TOTAL_LATTICE_CELLS);
+                }
+                break; /* break out of for loop once lattice cell gamma is found
+                          and priority queue is updated */
+              }
+            }
+          }
+        }
+      }
+    }
+    int nj = 0;
+    for(int k=0; k<NCPS; k++){
+      for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+        for(int j=1; j<NCPS; j++){
+
+          N[nf-j + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE]  = 
+          N[nf-j-1 + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE];
+        }
+
+          N[SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE]  = 0;
+      }
+    }
+
+          N[interval-1 + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE]  = 0;
+          
+
+          for(int g=0; g<TOTAL_LATTICE_CELLS; g++){
+            /* when lattice cell gamma is found in Q
+              we update its event time */
+            if( Q[g] != (interval-1 + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) ){ 
+            }
+            else{
+              /* save event time in lattice cell gamma for comparison */
+              t_old = t[g];
+              /* assign random number to calculate new event time in lattice cell gamma */
+              u3 = (double)rand() / RAND_MAX;
+              // t[i] = tlambda - log(u11)/W[gamma];
+              t[g] = (double)interval - log(u3)/
+              W[NCPS + interval-1 + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE];
+              /* if new event time is less than old event time
+                we use decrease to percolate up the heap */
+              if(t[g] < t_old) {
+                decrease_key(Q, t, g);
+              }
+              else if(t[g] > t_old) {/* if new event time is greater than old event time
+                                        we use heapify to percolate down the heap */
+                min_heapify(Q, t, g, TOTAL_LATTICE_CELLS);
+              }
+              break; /* break out of for loop once lattice cell gamma is found
+                        and priority queue is updated */
+            }
+          }
+        }        
+      } 
+    }
+
     u4 = rand();
     u5 = (double)rand() / RAND_MAX;
     directionID = u4%(2*DIM);
@@ -252,7 +393,7 @@ for (int iter=0; iter < ITER_MAX; iter++){
     /* assign random number to calculate new event time in lattice cell lambda */
     u10 = (double)rand() / RAND_MAX;
     // t[0] = tlambda - log(u10) / W[lambda];
-    t[0] = tlambda + COORDF/W[lambda];
+    t[0] = tlambda + 1.0/W[lambda];
 
     /* update order of the priority queue by percolating down the heap*/
     min_heapify(Q, t, 0, TOTAL_LATTICE_CELLS);
@@ -269,7 +410,7 @@ for (int iter=0; iter < ITER_MAX; iter++){
         /* assign random number to calculate new event time in lattice cell gamma */
         u11 = (double)rand() / RAND_MAX;
         // t[i] = tlambda - log(u11)/W[gamma];
-        t[i] = tlambda + COORDF/W[gamma];
+        t[i] = tlambda + 1.0/W[gamma];
         /* if new event time is less than old event time
            we use decrease to percolate up the heap */
         if(t[i] < tgamma) {
@@ -293,17 +434,17 @@ for (int iter=0; iter < ITER_MAX; iter++){
   D = (double)(x*x + y*y + z*z)/(2*DIM)/tlambda/TOTAL_BACTERIA_NUM/(SCALE*SCALE);
   //  printf("\n");
   //  printf("%f\n",D);
-  DSUM = DSUM + D;
-  DAVG = DSUM/(iter+1);
+  Dsum = Dsum + D;
+  Davg = Dsum/(iter+1);
   if(iter%SNAPSHOT_RATE == 0){ /* this is the snapshot conditional statement
                                where we print a snapshot of the system */
       /* we keep track of the concentration of proteins in the nanodomain
          Nin/Ntot as a function of simulation time t[0] */
       // printf("%d\t%f\t%d\n",pt,t[0],hop);
-    // printf("%d\t%f\n",iter,DAVG);
+    // printf("%d\t%f\n",iter,Davg);
   }
 }
-// printf("%f",DAVG);
+// printf("%f",Davg);
 printf("%d\t%d\t%f\n",TOTAL_LATTICE_CELLS,SCALE,TIME_MAX);
 
   
