@@ -11,22 +11,20 @@ TOTAL_LATTICE_CELLS = data(end,3);
 SCALE = data(end,4);
 TIME_MAX = data(end,5);
 
-Vin = 180^3;
+Vin = (180^2)*400;
 V = 400^3;
 Vout = V - Vin;
 Din = 180;
 Dout = 540;
-rhoav = mean(rho)*ones(size(rho));
+rhomean = mean(rho((end-100):end))
+rhoav = rhomean*ones(3601,1);
+rho_analytical = 1/(1 + Vout*Din/Vin/Dout)
+
 
 figure(3)
 hold on
 plot(t,rho,'r-');
-plot((0:1:3600)/3600,ones(1,3601)*rhoav,'--g');
-hold off
-
-figure(4)
-hold on
-plot(t,error,'k-');
+% plot((0:1:3600)/3600,rhoav,'--g');
 hold off
 
 % clear all

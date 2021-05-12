@@ -27,9 +27,9 @@ USAGE
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN)/* time between hops inside nanodomain (s) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (s). we set to zero since none were reported in the experiments. */
 #define SCALE 1 /*re-scales the size of the lattice cells */
-#define TIME_MAX 3600.0 /*simulation time limit */
+#define TIME_MAX 14500.0 /*simulation time limit */
 #define ITER_MAX 1 /*number of iterations of the simulation */
-#define SDSPEED 3
+#define SDSPEED 4
 #define DIM 3 /* Our domain is 3D */
 
 int main() {
