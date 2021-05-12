@@ -14,22 +14,22 @@ USAGE
 #include <math.h>
 #include "minHeap.h"
 
-#define SNAPSHOT_RATE 1000 /* we take a snapshot after every SNAPSHOT_RATE events */
+#define SNAPSHOT_RATE 100 /* we take a snapshot after every SNAPSHOT_RATE events */
 #define NUM_CELLS_ONESIDE 40 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
 #define TOTAL_BACTERIA_NUM 64000 /* Total number of emerin monomer proteins */
 #define N0 (TOTAL_BACTERIA_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
-#define NCPS 11 /* number of lattice cells per side of square nanodomain */
+#define NCPS 18 /* number of lattice cells per side of square nanodomain */
 #define V (6.0*6.0*6.0) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
-#define D_IN 30.0
+#define D_IN 300.0
 #define D_OUT 300.0
-#define LATTICE_CELL_LENGTH 30.0 /* lattice cell length (=30.0 micrometer/SCALE)*/
+#define LATTICE_CELL_LENGTH 10.0 /* lattice cell length (=30.0 micrometer/SCALE)*/
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN)/* time between hops inside nanodomain (s) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (s). we set to zero since none were reported in the experiments. */
 #define SCALE 1 /*re-scales the size of the lattice cells */
 #define TIME_MAX 200000.0 /*simulation time limit */
 #define ITER_MAX 1 /*number of iterations of the simulation */
-#define SDSPEED 1
+#define SDSPEED 3
 #define DIM 3 /* Our domain is 3D */
 
 int main() {

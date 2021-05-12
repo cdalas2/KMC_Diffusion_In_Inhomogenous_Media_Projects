@@ -14,22 +14,22 @@ USAGE
 #include <math.h>
 #include "minHeap.h"
 
-#define SNAPSHOT_RATE 1000 /* we take a snapshot after every SNAPSHOT_RATE events */
+#define SNAPSHOT_RATE 10000 /* we take a snapshot after every SNAPSHOT_RATE events */
 #define NUM_CELLS_ONESIDE 40 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
 #define TOTAL_BACTERIA_NUM 64000 /* Total number of emerin monomer proteins */
 #define N0 (TOTAL_BACTERIA_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
-#define NCPS 11 /* number of lattice cells per side of square nanodomain */
+#define NCPS 18 /* number of lattice cells per side of square nanodomain */
 #define V (6.0*6.0*6.0) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
-#define D_IN 30.0
-#define D_OUT 300.0
-#define LATTICE_CELL_LENGTH 30.0 /* lattice cell length (=30.0 micrometer/SCALE)*/
+#define D_IN 180.0
+#define D_OUT 540.0
+#define LATTICE_CELL_LENGTH 10.0 /* lattice cell length (=10.0 micrometer/SCALE)*/
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN)/* time between hops inside nanodomain (s) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (s). we set to zero since none were reported in the experiments. */
 #define SCALE 1 /*re-scales the size of the lattice cells */
-#define TIME_MAX 200000.0 /*simulation time limit */
+#define TIME_MAX 3600.0 /*simulation time limit */
 #define ITER_MAX 1 /*number of iterations of the simulation */
-#define SDSPEED 1
+#define SDSPEED 3
 #define DIM 3 /* Our domain is 3D */
 
 int main() {
@@ -171,7 +171,7 @@ int main() {
     for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
         N[i] =  N0;
     }
-    // N[TOTAL_LATTICE_CELLS/2 + NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE/2 + NUM_CELLS_ONESIDE/2] = TOTAL_BACTERIA_NUM;
+    // N[0] = TOTAL_BACTERIA_NUM;
 
     srand(time(NULL));
     for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
@@ -300,9 +300,8 @@ int main() {
             } 
           }
 
-          printf("%f\t%d\t%d\t%f\n",(double)Nin/Ntot,lambda,gamma,tlambda);
+          printf("%d\t%f\t%d\t%d\t%f\n",pt,(double)Nin/Ntot,lambda,gamma,tlambda);
         }
-
         tF = tlambda;
       }
       else{
@@ -315,71 +314,29 @@ int main() {
             }
 
             tau[lr] = TAU_IN;  
-            if(N[lr] == 0){
-              Nr = 0;
-            }
-            else{
-              Nr = 1;
-
-            }
             ls = nn[lr][3];
             N[lr]  = N[lr] + N[ls];
             W[lr] = (double)N[lr]/tau[lr]/(2*DIM);
-
-            if(Nr == 0){
-              for(int j=0; j<TOTAL_LATTICE_CELLS; j++){
-                /* when lattice cell gamma is found in Q
-                    we update its event time */
-                if( Q[j] != nn[lr][3] ){ 
-                }
-                else{
-                  tr = t[j];
-                  break; /* break out of for loop once lattice cell gamma is found
-                          and priority queue is updated */
-                
-                }
+            /* assign random number to calculate new event time in lattice cell gamma */
+            u5 = (double)rand() / RAND_MAX;
+            // t[i] = tlambda - log(u11)/W[gamma];
+            tr = (double)interval/SDSPEED - log(u5)/W[lr];
+            for(int j=0; j<TOTAL_LATTICE_CELLS; j++){
+              if( Q[j] != lr ){ 
               }
-              for(int j=0; j<TOTAL_LATTICE_CELLS; j++){
-                if( Q[j] != lr ){ 
+              else{
+                /* save event time in lattice cell gamma for comparison */
+                if(tr < t[j]) {
+                t[j] = tr;
+                decrease_key(Q, t, j);
                 }
-                else{
-                  /* save event time in lattice cell gamma for comparison */
-                  if(tr < t[j]) {
-                    t[j] = tr;
-                    decrease_key(Q, t, j);
-                  }
-                  else if(tr > t[j]) {/* if new event time is greater than old event time
-                                            we use heapify to percolate down the heap */
-                    t[j] = tr;
-                    min_heapify(Q, t, j, TOTAL_LATTICE_CELLS);
-                  }
-                  break; /* break out of for loop once lattice cell gamma is found
-                            and priority queue is updated */
+                else if(tr > t[j]) {/* if new event time is greater than old event time
+                                        we use heapify to percolate down the heap */
+                t[j] = tr;
+                min_heapify(Q, t, j, TOTAL_LATTICE_CELLS);
                 }
-              }
-            }
-            else{
-              for(int j=0; j<TOTAL_LATTICE_CELLS; j++){
-                if( Q[j] != lr ){ 
-                }
-                else{
-                  /* assign random number to calculate new event time in lattice cell gamma */
-                  u5 = (double)rand() / RAND_MAX;
-                  // t[i] = tlambda - log(u11)/W[gamma];
-                  tr = (double)interval/SDSPEED - log(u5)/W[lr];
-                  /* save event time in lattice cell gamma for comparison */
-                  if(tr < t[j]) {
-                    t[j] = tr;
-                    decrease_key(Q, t, j);
-                  }
-                  else if(tr > t[j]) {/* if new event time is greater than old event time
-                                            we use heapify to percolate down the heap */
-                    t[j] = tr;
-                    min_heapify(Q, t, j, TOTAL_LATTICE_CELLS);
-                  }
-                  break; /* break out of for loop once lattice cell gamma is found
-                            and priority queue is updated */
-                }
+                break; /* break out of for loop once lattice cell gamma is found
+                        and priority queue is updated */
               }
             }
           }
@@ -395,18 +352,9 @@ int main() {
               ls = nn[lr][3];
 
               N[lr]  = N[ls];
-              // W[lr] = (double)N[lr]/tau[lr]/(2*DIM);
-              // u6 = (double)rand() / RAND_MAX;
-              // tr = (double)interval/SDSPEED - log(u6)/W[lr];
-              for(int q=0; q<TOTAL_LATTICE_CELLS; q++){
-                if( Q[q] != ls ){ 
-                }
-                else{
-                  tr = t[q];
-                  break; /* break out of for loop once lattice cell gamma is found
-                            and priority queue is updated */
-                }
-              }
+              W[lr] = (double)N[lr]/tau[lr]/(2*DIM);
+              u6 = (double)rand() / RAND_MAX;
+              tr = (double)interval/SDSPEED - log(u6)/W[lr];
               for(int q=0; q<TOTAL_LATTICE_CELLS; q++){
                 if( Q[q] != lr ){ 
                 }
@@ -465,7 +413,7 @@ int main() {
               }
             } 
           }
-          printf("%f\t%d\t%d\t%f\n",(double)Nin/Ntot,10*TOTAL_LATTICE_CELLS,10*TOTAL_LATTICE_CELLS,(double)interval/SDSPEED);
+          printf("%d\t%f\t%d\t%d\t%f\n",pt,(double)Nin/Ntot,10*TOTAL_LATTICE_CELLS,10*TOTAL_LATTICE_CELLS,(double)interval/SDSPEED);
         }
         tF = (double)interval/SDSPEED;
         interval = interval + 1;
@@ -486,7 +434,7 @@ int main() {
     }
   }
   // printf("%f",Davg);
-  printf("%f\t%d\t%d\t%f\n",(double)SDSPEED,TOTAL_LATTICE_CELLS,SCALE,TIME_MAX);
+  printf("%d\t%f\t%d\t%d\t%f\n",SNAPSHOT_RATE,(double)SDSPEED,TOTAL_LATTICE_CELLS,SCALE,TIME_MAX);
 
   
   return 0;
