@@ -158,6 +158,7 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which includes int
 11. Repeat steps 4-10 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Bus Ride Simulations
+<img src="SKMCTM3D_rho.png " width="425" height="375">
 
 ### References For Bacteria Bus Ride Scenario
 [7] Mittal, N., Budrene, E. O., Brenner, M. P., & van Oudenaarden, A. (2003). Motility of Escherichia coli cells in clusters formed by chemotactic aggregation. Proceedings of the National Academy of Sciences, 100(23), 13259–13263. https://doi.org/10.1073/pnas.2233626100
