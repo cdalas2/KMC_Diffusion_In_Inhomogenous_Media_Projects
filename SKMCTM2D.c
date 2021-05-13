@@ -14,7 +14,7 @@ USAGE
 #include <math.h>
 #include "minHeap.h"
 
-#define SNAPSHOT_RATE 1000 /* we take a snapshot after every SNAPSHOT_RATE events */
+#define SNAPSHOT_RATE 1 /* we take a snapshot after every SNAPSHOT_RATE events */
 #define NUM_CELLS_ONESIDE 40 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
 #define TOTAL_BACTERIA_NUM 1600 /* Total number of emerin monomer proteins */
@@ -27,9 +27,9 @@ USAGE
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN)/* time between hops inside nanodomain (s) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (s). we set to zero since none were reported in the experiments. */
 #define SCALE 1 /*re-scales the size of the lattice cells */
-#define TIME_MAX 14500.0 /*simulation time limit */
+#define TIME_MAX 600.0 /*simulation time limit */
 #define ITER_MAX 1 /*number of iterations of the simulation */
-#define SDSPEED 1
+#define SDSPEED 4
 #define DIM 2 /* Our domain is 2D */
 
 int main() {
@@ -92,15 +92,6 @@ int main() {
     LCells3D[0][NUM_CELLS_ONESIDE+1] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][0] = INFINITY;
     LCells3D[NUM_CELLS_ONESIDE+1][NUM_CELLS_ONESIDE+1] = INFINITY;
-
-  for(int j=0; j<NUM_CELLS_ONESIDE+2; j++){
-    LCells3D[0][j] = INFINITY;
-    LCells3D[NUM_CELLS_ONESIDE+1][j] = INFINITY;
-  }
-  for(int i=0; i<NUM_CELLS_ONESIDE+2; i++){
-    LCells3D[i][0] = INFINITY;
-    LCells3D[i][NUM_CELLS_ONESIDE+1] = INFINITY;
-  }
 
   /* Here we fill in the neighbor list of each lattice cell */
     for(int i=0; i<NUM_CELLS_ONESIDE; i++){
@@ -262,7 +253,7 @@ int main() {
             }
           } 
 
-          printf("%d\t%f\t%d\t%d\t%f\n",pt,(double)Nin/Ntot,lambda,gamma,tlambda);
+          printf("%d\t%d\t%f\n",lambda,gamma,tlambda);
         }
         tF = tlambda;
       }
@@ -369,7 +360,7 @@ int main() {
                 jr = nn[jr][1];
               }
             } 
-          printf("%d\t%f\t%d\t%d\t%f\n",pt,(double)Nin/Ntot,10*TOTAL_LATTICE_CELLS,10*TOTAL_LATTICE_CELLS,(double)interval/SDSPEED);
+          printf("%d\t%d\t%f\n",10*TOTAL_LATTICE_CELLS,10*TOTAL_LATTICE_CELLS,(double)interval/SDSPEED);
         }
         tF = (double)interval/SDSPEED;
         interval = interval + 1;
@@ -390,7 +381,7 @@ int main() {
     }
   }
   // printf("%f",Davg);
-  printf("%d\t%f\t%d\t%d\t%f\n",SNAPSHOT_RATE,(double)SDSPEED,TOTAL_LATTICE_CELLS,SCALE,TIME_MAX);
+  printf("%d\t%d\t%f\n",TOTAL_LATTICE_CELLS,SDSPEED,TIME_MAX);
 
   
   return 0;
