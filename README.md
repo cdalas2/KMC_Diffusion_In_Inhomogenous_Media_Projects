@@ -140,15 +140,10 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which includes int
                         Calculate transition rates *W(**N**,&tau;)* of each lattice cell.
                         Sample event times for each lattice cell using random numbers and the transition rates.
 3. Sort lattice cells by their event time in a binary min heap. 
-4. The microdomain is of constant shape and translates 1 unit cell per second Eastward, always. 
-   So we check if its time to translate the microdomain by comparing 1 sec intervals to the next active cell's event time.
-   If this event time crosses over into the next 1 sec interval, we translate the microdomain and the particles inside before the next 
-   diffusive particle hop.
-5. If its time to translate the microdomain, we shift over the occupancy numbers and event times of the lattice cells in the 
-   microdomain over one slab of lattice cells to the right and re-sample the event times of the lattice cells left behind by 
-   the microdomain. If the lattice cells that are added to the front of the microdomain have particles, they are added to the 
-   lattice cells at the front of the microdomain and these receiving lattice cells event times are re-sampled to occur after 
-   the microdomain's translation. The min heap is re-sorted, if necessary, and step 4 is repeated.
+4. The microdomain is of constant shape and translates at a constant 40 micrometers per second Eastward, always. 
+   So we check if its time to translate the microdomain over by one lattice cell by comparing the next active cell's event time to the microdomain's next            translation event time.
+5. If its time to translate the microdomain, we shift over the occupancy numbers of the lattice cells in the 
+   microdomain over one lattice cells to the right and re-sample the event times of the lattice cells based on their new occupancy numbers and diffusion rates.      The min heap is re-sorted, if necessary, and step 4 is repeated.
 6. If it is not time to translate the microdomain, we proceed as we would with a non-translating microdomain. We pick the lattice 
    cell at the top of the minheap for the particle to hop out of.
 7. Randomly pick one of the nearest neighbors of this lattice cell, for the particle to hop into.
