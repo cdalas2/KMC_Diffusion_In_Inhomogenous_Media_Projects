@@ -14,10 +14,10 @@ USAGE
 #include <math.h>
 #include "minHeap.h"
 
-#define SNAPSHOT_RATE 10000 /* we take a snapshot after every SNAPSHOT_RATE events */
+#define SNAPSHOT_RATE 1000 /* we take a snapshot after every SNAPSHOT_RATE events */
 #define NUM_CELLS_ONESIDE 40 /* number of lattice cells along one side of square system domain */
-#define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
-#define TOTAL_BACTERIA_NUM 64000 /* Total number of emerin monomer proteins */
+#define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
+#define TOTAL_BACTERIA_NUM 1600 /* Total number of emerin monomer proteins */
 #define N0 (TOTAL_BACTERIA_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
 #define NCPS 18 /* number of lattice cells per side of square nanodomain */
 // #define V (6.0*6.0*6.0) /* Total area of system domain (LATTICE_CELL_LENGTH^2) */
@@ -29,8 +29,8 @@ USAGE
 #define SCALE 1 /*re-scales the size of the lattice cells */
 #define TIME_MAX 14500.0 /*simulation time limit */
 #define ITER_MAX 1 /*number of iterations of the simulation */
-#define SDSPEED 4
-#define DIM 3 /* Our domain is 3D */
+#define SDSPEED 1
+#define DIM 2 /* Our domain is 2D */
 
 int main() {
   /* directionID will hold lattice neighbor index protein hops into */
@@ -42,7 +42,7 @@ int main() {
   /* tt will hold sampled trapped time */
   /* th will hold sampled hop time */
   /* D will hold the measured simulated diffusivity */
-  int directionID, lambda, gamma, u2, y, x, z, Nr, lr, ls, pt, interval, SDBase, jr;
+  int directionID, lambda, gamma, u2, y, x, Nr, lr, ls, pt, interval, SDBase, jr;
   double u1, u3, u4, u5, u6, D, tr,tF;
 
   /* Ntot is for the total number of proteins across 
@@ -62,7 +62,7 @@ int main() {
   double W[TOTAL_LATTICE_CELLS]; /* transition rates (diffusion intensities) in each lattice cell */
   double t[TOTAL_LATTICE_CELLS]; /* next queued (sampled) event time in each lattice cell */
   double tau[TOTAL_LATTICE_CELLS]; /* time between hops in each lattice cell */
-  int LCells3D[NUM_CELLS_ONESIDE+2][NUM_CELLS_ONESIDE+2][NUM_CELLS_ONESIDE+2]; /* indexes of each lattice cell with padding on top,
+  int LCells3D[NUM_CELLS_ONESIDE+2][NUM_CELLS_ONESIDE+2]; /* indexes of each lattice cell with padding on top,
                            bottom, left, and right sides to account for the 
                            periodic boundary conditions */
   int Q[TOTAL_LATTICE_CELLS]; /* will hold indexes of the lattice cells organized by their 
@@ -71,68 +71,46 @@ int main() {
   /* filling indexes of lattice cells into an array 
      which is padded on all sides to reflect the
      periodic boundary conditions */
-  for(int k=1; k<NUM_CELLS_ONESIDE+1; k++){
     for(int i=1; i<NUM_CELLS_ONESIDE+1; i++){
       for(int j=1; j<NUM_CELLS_ONESIDE+1; j++){
-        LCells3D[i][j][k] = (k-1)*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE + (i-1)*NUM_CELLS_ONESIDE + j-1;
+        LCells3D[i][j] = (i-1)*NUM_CELLS_ONESIDE + j-1;
       }
     }
-  }
 
-  for(int k=1; k<NUM_CELLS_ONESIDE+1; k++){
     for(int j=1; j<NUM_CELLS_ONESIDE+1; j++){
-      LCells3D[0][j][k] = LCells3D[NUM_CELLS_ONESIDE][j][k];
-      LCells3D[NUM_CELLS_ONESIDE+1][j][k] = LCells3D[1][j][k];
+      LCells3D[0][j] = LCells3D[NUM_CELLS_ONESIDE][j];
+      LCells3D[NUM_CELLS_ONESIDE+1][j] = LCells3D[1][j];
     }
-  }
 
-  for(int k=1; k<NUM_CELLS_ONESIDE+1; k++){
     for(int i=1; i<NUM_CELLS_ONESIDE+1; i++){
-      LCells3D[i][0][k] = LCells3D[i][NUM_CELLS_ONESIDE][k];
-      LCells3D[i][NUM_CELLS_ONESIDE+1][k] = LCells3D[i][1][k];
+      LCells3D[i][0] = LCells3D[i][NUM_CELLS_ONESIDE];
+      LCells3D[i][NUM_CELLS_ONESIDE+1] = LCells3D[i][1];
     }
-  }
-
-  for(int i=1; i<NUM_CELLS_ONESIDE+1; i++){
-    for(int j=1; j<NUM_CELLS_ONESIDE+1; j++){
-      LCells3D[i][j][0] = LCells3D[i][j][NUM_CELLS_ONESIDE];
-      LCells3D[i][j][NUM_CELLS_ONESIDE+1] = LCells3D[i][j][1];
-    }
-  }
 
   /* fill corners with INFINITY since they are irrelevant */
-  for(int k=0; k<NUM_CELLS_ONESIDE+2; k++){
-    LCells3D[0][0][k] = INFINITY;
-    LCells3D[0][NUM_CELLS_ONESIDE+1][k] = INFINITY;
-    LCells3D[NUM_CELLS_ONESIDE+1][0][k] = INFINITY;
-    LCells3D[NUM_CELLS_ONESIDE+1][NUM_CELLS_ONESIDE+1][k] = INFINITY;
-  }
+    LCells3D[0][0] = INFINITY;
+    LCells3D[0][NUM_CELLS_ONESIDE+1] = INFINITY;
+    LCells3D[NUM_CELLS_ONESIDE+1][0] = INFINITY;
+    LCells3D[NUM_CELLS_ONESIDE+1][NUM_CELLS_ONESIDE+1] = INFINITY;
+
   for(int j=0; j<NUM_CELLS_ONESIDE+2; j++){
-    LCells3D[0][j][0] = INFINITY;
-    LCells3D[0][j][NUM_CELLS_ONESIDE+1] = INFINITY;
-    LCells3D[NUM_CELLS_ONESIDE+1][j][0] = INFINITY;
-    LCells3D[NUM_CELLS_ONESIDE+1][j][NUM_CELLS_ONESIDE+1] = INFINITY;
+    LCells3D[0][j] = INFINITY;
+    LCells3D[NUM_CELLS_ONESIDE+1][j] = INFINITY;
   }
   for(int i=0; i<NUM_CELLS_ONESIDE+2; i++){
-    LCells3D[i][0][0] = INFINITY;
-    LCells3D[i][0][NUM_CELLS_ONESIDE+1] = INFINITY;
-    LCells3D[i][NUM_CELLS_ONESIDE+1][0] = INFINITY;
-    LCells3D[i][NUM_CELLS_ONESIDE+1][NUM_CELLS_ONESIDE+1] = INFINITY;
+    LCells3D[i][0] = INFINITY;
+    LCells3D[i][NUM_CELLS_ONESIDE+1] = INFINITY;
   }
 
   /* Here we fill in the neighbor list of each lattice cell */
-  for(int k=0; k<NUM_CELLS_ONESIDE; k++){
     for(int i=0; i<NUM_CELLS_ONESIDE; i++){
       for(int j=0; j<NUM_CELLS_ONESIDE; j++){
-        nn[k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE + i*NUM_CELLS_ONESIDE + j][0] = LCells3D[i][j+1][k+1]; /* North */
-        nn[k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE + i*NUM_CELLS_ONESIDE + j][1] = LCells3D[i+1][j+2][k+1]; /* East */
-        nn[k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE + i*NUM_CELLS_ONESIDE + j][2] = LCells3D[i+2][j+1][k+1]; /* South */
-        nn[k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE + i*NUM_CELLS_ONESIDE + j][3] = LCells3D[i+1][j][k+1]; /* West */
-        nn[k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE + i*NUM_CELLS_ONESIDE + j][4] = LCells3D[i+1][j+1][k+2]; /* Above */
-        nn[k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE + i*NUM_CELLS_ONESIDE + j][5] = LCells3D[i+1][j+1][k]; /* Below */
+        nn[i*NUM_CELLS_ONESIDE + j][0] = LCells3D[i][j+1]; /* Up */
+        nn[i*NUM_CELLS_ONESIDE + j][1] = LCells3D[i+1][j+2]; /* Right */
+        nn[i*NUM_CELLS_ONESIDE + j][2] = LCells3D[i+2][j+1]; /* Down */
+        nn[i*NUM_CELLS_ONESIDE + j][3] = LCells3D[i+1][j]; /* Left */
       }
     }
-  }
 
   // printf("0\t0\t0\t0\t0\n");
   /*Loop for running the simulation many times */
@@ -143,18 +121,15 @@ int main() {
     tr = 0.0;
     x = 0;
     y = 0;
-    z = 0;
 
     for(int i=0; i<TOTAL_LATTICE_CELLS; i++){ /* First we will set all times to TAU_OUT */
       tau[i] = TAU_OUT;
     }
-    for(int k=0; k<NCPS; k++){
-      for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+    for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
         for(int j=0; j<NCPS; j++){
-            tau[j + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] = TAU_IN;  
+            tau[j + i*NUM_CELLS_ONESIDE] = TAU_IN;  
         }
-      } 
-    }
+    } 
       /* Assign the time between hops in each lattice cell.
       Our nanodomain is square with top left corner at
       lattice cell i = 23 + 20*NUM_CELLS_ONESIDE */
@@ -180,13 +155,11 @@ int main() {
         t[i] = -log(u1)/W[i];
         Ntot = Ntot + N[i];
     }
-    for(int k=0; k<NCPS; k++){
-      for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+    for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
         for(int j=0; j<NCPS; j++){
-            Nin = Nin + N[j + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE];  
+            Nin = Nin + N[j + i*NUM_CELLS_ONESIDE];  
         }
-      } 
-    }
+    } 
 
     build_min_heap(Q, t, TOTAL_LATTICE_CELLS); /* create priority queue as a binary min heap 
                                 organized by the time of the event in each
@@ -222,14 +195,6 @@ int main() {
           case 3 :
             x = x-1;
             // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,-hop,0,0,t[0],lambda);
-            break;
-          case 4 :
-            z = z+1;
-            // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,0,0,hop,t[0],lambda);
-            break;
-          case 5 :
-            z = z-1;
-            // printf("%d\t%d\t%d\t%d\t%f\t%d\n",pt+1,0,0,-hop,t[0],lambda);
             break;
         }
         /* 1 protein hops out of lattice cell lambda */
@@ -289,26 +254,22 @@ int main() {
           for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
             Ntot = Ntot + N[i];
           }
-
-          for(int k=0; k<NCPS; k++){
-            for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
-              jr = SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE;
-              for(int j=0; j<NCPS; j++){
-                Nin = Nin + N[jr];
-                jr = nn[jr][1];
-              }
-            } 
-          }
+          for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
+            jr = SDBase + i*NUM_CELLS_ONESIDE;
+            for(int j=0; j<NCPS; j++){
+              Nin = Nin + N[jr];
+              jr = nn[jr][1];
+            }
+          } 
 
           printf("%d\t%f\t%d\t%d\t%f\n",pt,(double)Nin/Ntot,lambda,gamma,tlambda);
         }
         tF = tlambda;
       }
       else{
-        for(int k=0; k<NCPS; k++){
           for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
-            tau[SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE] = TAU_OUT; 
-            lr = SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE;
+            tau[SDBase + i*NUM_CELLS_ONESIDE] = TAU_OUT; 
+            lr = SDBase + i*NUM_CELLS_ONESIDE;
             for(int j=0; j<NCPS; j++){
               lr = nn[lr][1];
             }
@@ -340,10 +301,8 @@ int main() {
               }
             }
           }
-        }
-        for(int k=0; k<NCPS; k++){
           for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
-            lr = SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE;
+            lr = SDBase + i*NUM_CELLS_ONESIDE;
             for(int j=0; j<NCPS; j++){
               lr = nn[lr][1];
             }
@@ -374,7 +333,7 @@ int main() {
                 }
               }
             }
-            lr = SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE;
+            lr = SDBase + i*NUM_CELLS_ONESIDE;
             N[lr] = 0;
             W[lr] = 0;
             tr = INFINITY;
@@ -391,7 +350,6 @@ int main() {
               }
             }
           }
-        }
         SDBase = nn[SDBase][1];
         if(pt%SNAPSHOT_RATE == 0){ /* this is the snapshot conditional statement
                                   where we print a snapshot of the system */
@@ -404,15 +362,13 @@ int main() {
           for(int i=0; i<TOTAL_LATTICE_CELLS;i++){
             Ntot = Ntot + N[i];
           }
-          for(int k=0; k<NCPS; k++){
             for(int i=0; i<NCPS; i++){ /* Now we switch in hop times inside nanodomain */
-              jr = SDBase + i*NUM_CELLS_ONESIDE + k*NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE;
+              jr = SDBase + i*NUM_CELLS_ONESIDE;
               for(int j=0; j<NCPS; j++){
                 Nin = Nin + N[jr];
                 jr = nn[jr][1];
               }
             } 
-          }
           printf("%d\t%f\t%d\t%d\t%f\n",pt,(double)Nin/Ntot,10*TOTAL_LATTICE_CELLS,10*TOTAL_LATTICE_CELLS,(double)interval/SDSPEED);
         }
         tF = (double)interval/SDSPEED;
@@ -420,7 +376,7 @@ int main() {
       }
       pt = pt+1; /* increment event id */
     } /* end of while loop after TIME_MAX */
-    D = (double)(x*x + y*y + z*z)/(2*DIM)/tlambda/TOTAL_BACTERIA_NUM/(SCALE*SCALE);
+    D = (double)(x*x + y*y)/(2*DIM)/tlambda/TOTAL_BACTERIA_NUM/(SCALE*SCALE);
     //  printf("\n");
     //  printf("%f\n",D);
     Dsum = Dsum + D;
