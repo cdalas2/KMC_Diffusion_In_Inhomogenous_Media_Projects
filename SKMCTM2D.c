@@ -137,6 +137,7 @@ int main() {
     for(int i=0; i<TOTAL_LATTICE_CELLS; i++){
         N[i] =  N0;
     }
+    
     // N[0] = TOTAL_BACTERIA_NUM;
 
     srand(time(NULL));
