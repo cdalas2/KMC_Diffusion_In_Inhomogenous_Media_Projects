@@ -20,8 +20,10 @@ USAGE
 #define NUM_CELLS_ONESIDE 40 /* number of lattice cells along one side of square system domain */
 #define TOTAL_LATTICE_CELLS (NUM_CELLS_ONESIDE*NUM_CELLS_ONESIDE) /* Total number of lattice cells */
 #define N0 (TOTAL_PROTEIN_NUM/TOTAL_LATTICE_CELLS) /* Initial number of proteins in each lattice */
-#define D_IN 250.0 /* Diffusion coefficient inside nanodomain (nanometers^2/W) */
-#define D_OUT 3500.0 /* Diffusion coefficient outside nanodomain (nanometers^2/W) */
+// #define D_IN 250.0 /* Diffusion coefficient inside nanodomain (nanometers^2/W) */
+// #define D_OUT 3500.0 /* Diffusion coefficient outside nanodomain (nanometers^2/W) */
+#define D_IN 180 /* Diffusion coefficient inside nanodomain (nanometers^2/W) */
+#define D_OUT 540 /* Diffusion coefficient outside nanodomain (nanometers^2/W) */
 
 #define A_IN 12100.0 /* Area of nanodomain (nm^2) */
 #define NCPS 11 /* number of lattice cells per side of square nanodomain */
@@ -30,7 +32,7 @@ USAGE
 #define LATTICE_CELL_LENGTH 10.0 /* lattice cell length (nm)*/
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN) /* time between hops inside nanodomain (W) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (W) */
-#define TIME_MAX 300.0
+#define TIME_MAX 600.0
 #define SCALE 1 
 #define DIM 2
 #define LETTERS_CELL_NUM 146

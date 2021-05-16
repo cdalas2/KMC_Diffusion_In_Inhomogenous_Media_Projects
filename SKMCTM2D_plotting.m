@@ -11,6 +11,27 @@
 % % % SCALE = data(end,4);
 % % % TIME_MAX = data(end,5);
 
+clear all
+clc
+SquarePositionsData = load("SKMC2.o");
+SquareSender = SquarePositionsData(1:end-1,1)+1;
+SquareReceiver = SquarePositionsData(1:end-1,2)+1;
+Squarerho = SquarePositionsData(1:end-1,3);
+SquaresimT = SquarePositionsData(1:end-1,4);
+SquareK = SquarePositionsData(end,1);
+SquareN = ones(K,1);
+
+Squarerho_max = Squarerho(end)
+SquareLCELLS_PER_LENGTH_SCALE = SquarePositionsData(end,2);
+SquareTIME_MAX = SquarePositionsData(end,4);
+SquareLENGTH_SCALE = 10; %1 micrometer
+SquareL = SquareLENGTH_SCALE/SquareLCELLS_PER_LENGTH_SCALE;
+SquareLatticeCoords = InitializePositionsSquare(1600,10);
+for i = 1:SquareK
+    SquarePositions(i,:)= SquareLatticeCoords(i,:) + (-SquareL/2 + (SquareL/2 + SquareL/2)*rand(1,2));
+end
+SquareParticleLocation = 1:SquareK;
+
 Ain = 180*400;
 A = 400^2;
 Aout = A - Ain;
