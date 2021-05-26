@@ -202,7 +202,6 @@ To run simulations from the other source code files, one simply needs to change 
 ## Authors Info
 - LinkedIn - [Carlos Alas LI](https://www.linkedin.com/in/carlos-alas-6a4643160/)
 - ResearchGate - [Carlos Alas RG](https://www.researchgate.net/profile/Carlos_Alas3)
-- Trinh Lan Hoa
 
 
 [Back To The Top](#PHYS516FINAL)
