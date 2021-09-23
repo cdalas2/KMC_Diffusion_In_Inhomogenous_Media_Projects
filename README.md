@@ -38,8 +38,7 @@ https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-
 ![sqrNano](https://user-images.githubusercontent.com/62254347/117357807-3db57280-ae6a-11eb-9da4-46301db5b705.gif)
 >This gif is of the first 5 minutes, of our SKMC run of a square nanodomain as described in our project notes, condensed to 20 seconds.
 
-I will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. I wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
-<img src="KMC_Protein_Clustering.pdf ">
+I will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. I wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES (Hidden) Will be turning this project into a publication.
 
 ### Subvolume Kinetic Monte Carlo
 I use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time. 
