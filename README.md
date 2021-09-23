@@ -1,7 +1,7 @@
 ![USCPHYS](https://user-images.githubusercontent.com/62254347/117349003-bcf17900-ae5f-11eb-9f3b-d0ceb8e59e50.gif)
 >I made this gif using our SKMC code, where the letters are subdomains assigned a slower diffusion rate.
 
-# KMC_DIFFUSION_INHOMOGENEOUS_MEDIA
+# Kinetic Monte Carlo methods for diffusion in various inhomogeneous media
 > I applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
 
 https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-8b3e-be868e8ae310.mp4
@@ -74,7 +74,7 @@ It is also interesting that this simple model which could be characterized by a 
 [3] Fernandez, A., Bautista, M. & Pinaud, F. Emerin oligomerization and nucleoskeletal coupling at the nuclear envelope regulate nuclear mechanics against stress. Submitted (2021). Available online at https://www.biorxiv.org/content/10.1101/2021.02.12.429834v2
 
 
-[Back To The Top](#KMC_DIFFUSION_INHOMOGENEOUS_MEDIA)
+[Back To The Top](#Kinetic-Monte-Carlo-methods-for-diffusion-in-various-inhomogeneous-media)
 
 ---
 
