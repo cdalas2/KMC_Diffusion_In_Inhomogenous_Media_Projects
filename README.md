@@ -1,11 +1,11 @@
 ![USCPHYS](https://user-images.githubusercontent.com/62254347/117349003-bcf17900-ae5f-11eb-9f3b-d0ceb8e59e50.gif)
->We made this gif using our SKMC code, where the letters are subdomains assigned a slower diffusion rate.
+>I made this gif using our SKMC code, where the letters are subdomains assigned a slower diffusion rate.
 
 # PHYS516FINAL
-> We applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
+> I applied kinetic monte carlo (KMC) methods, for predicting the trajectories of freely diffusing particles in various heterogeneous media [1,2], to investigate several scenarios in biophysics. 
 
 https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-8b3e-be868e8ae310.mp4
-> This video is of a non-interacting bacteria population diffusing through pores of characteristic size 3.24 &mu;m with measurement taken from [4], where we initialized the simulation with the entire population of bacteria in one cell, as to simulate the population emerging from a pipette or syringe; periodic boundary conditions are enforced at the boundaries of the domain volume. The simulated time was 20s, but the video is slowed to 99s.
+> This video is of a non-interacting bacteria population diffusing through pores of characteristic size 3.24 &mu;m with measurement taken from [4], where I initialized the simulation with the entire population of bacteria in one cell, as to simulate the population emerging from a pipette or syringe; periodic boundary conditions are enforced at the boundaries of the domain volume. The simulated time was 20s, but the video is slowed to 99s.
 
 ---
 
@@ -38,11 +38,11 @@ https://user-images.githubusercontent.com/62254347/117113593-891f3200-ad3f-11eb-
 ![sqrNano](https://user-images.githubusercontent.com/62254347/117357807-3db57280-ae6a-11eb-9da4-46301db5b705.gif)
 >This gif is of the first 5 minutes, of our SKMC run of a square nanodomain as described in our project notes, condensed to 20 seconds.
 
-We will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. We wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
+I will look at the phenomenon of monomer emerin proteins freely diffusing through an inhomogenous nuclear membrane surface where the heterogeneity is due to the clustering of the emerin protein in the form of nanodomains with spacially different diffusion rates. I wish to track the trajectories of the emerin proteins. The motion of the emerin proteins is governed by diffusion through the membrane lipids. Within the nanodomain, the diffusion coefficient is about an order of magnitude slower than that outside of it, due to the clustering of emerin proteins there. PROJECT NOTES--->
 <img src="KMC_Protein_Clustering.pdf ">
 
 ### Subvolume Kinetic Monte Carlo
-We use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time. 
+I use the stochastic lattice model for particle diffusion in an inhomogeneous media [1] and perform subvolume KMC simulations [2] for our numerical calculations of the emerin monomer protein concentration trapped in the nanodomain as a function of time. 
 
 #### SKMC Simulation Steps
 1. Domain patch is divided into *K* lattice cells.
@@ -61,8 +61,8 @@ We use the stochastic lattice model for particle diffusion in an inhomogeneous m
 9. Repeat steps 4-8 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Protein Clustering Simulations
-We used the lattice discretization of the domain and nanodomain shown in the figure on the left; the nanodomain is highlighted in red.
-We evolved the system of proteins for about 4 hours at which it was at a steady state with a nanodomain protein concentration of about 53%. Averaging the protein concentration over the 4 hours gave a mean concentration that differed less than 1% from the analytical solution for this situation; shown in the figure on the right.
+I used the lattice discretization of the domain and nanodomain shown in the figure on the left; the nanodomain is highlighted in red.
+I evolved the system of proteins for about 4 hours at which it was at a steady state with a nanodomain protein concentration of about 53%. Averaging the protein concentration over the 4 hours gave a mean concentration that differed less than 1% from the analytical solution for this situation; shown in the figure on the right.
 It is also interesting that this simple model which could be characterized by a different diffusion rate in the nanodomain suggests that protein clustering emerges from a change in diffusion rates in part of the domain. Diffusion rates can be varied by means of a mechanical stress on the membrane and so proteins may respond to mechanical stimuli by clustering due to changes in the rates of diffusion by the mechanical stimuli.
 
 <img src="Lattice.png " width="425" height="375"><img src="KMC_freeDiffusion.png " width="525" height="375">
@@ -81,7 +81,7 @@ It is also interesting that this simple model which could be characterized by a 
 
 ## 2. Bacteria Hopping And Trapping
 https://user-images.githubusercontent.com/62254347/116847393-47f01c00-ab9f-11eb-92a6-7ece68e53c37.mp4
-> In this video, we show the random walk of a single bacteria through a pore space with pores of characteristic size 3.6 &mu;m and using measurments from [4]. Here we show its diffusion without periodic boundary conditions but in an infinite domain. The simulation time is 10-minutes, though the video, here, has been condensed to 27s.
+> In this video, I show the random walk of a single bacteria through a pore space with pores of characteristic size 3.6 &mu;m and using measurments from [4]. Here I show its diffusion without periodic boundary conditions but in an infinite domain. The simulation time is 10-minutes, though the video, here, has been condensed to 27s.
 
 https://user-images.githubusercontent.com/62254347/116849027-bbdff380-aba2-11eb-941d-144c1c617acd.mp4
 >This video is the same simulation as the previous video, but with a black background and without the trajectory line.
@@ -89,7 +89,7 @@ https://user-images.githubusercontent.com/62254347/116849027-bbdff380-aba2-11eb-
 Many bacteria swim in the form of a random walk in order to sample an area and build a gradient towards food or towards (away from) a specific chemical. These bacteria perform a two-state motion (run and tumble) that involves an alternation of a directed swim and a stop and reorientation of direction. Sometimes these bacteria can encounter media that severly limits their mobility, such as when traveling through a porous media. It has been observed [4] that instead of the run and tumble motion, a hopping and trapping motion is ensued by the bacteria to navigate the porous media. While swimming in a porous media, the bacteria get stuck between a pore and some of its neighboring pores. In this trapped time, the bacteria randomly re-orients its direction to find a way out. Once the bacteria find a way out it swims straight until it gets stuck again. Its swim length between traps are the hop lengths which are set by the solid matrix of the pore cluster. The trap times are longer than the hop times and so we model the motion as transitions between trapped states using a an alteration of the subvolume KMC method. PROJECT NOTES---> <img src="KMC_Bacteria_Hopping_And_Trapping.pdf ">
 
 ### Subvolume Kinetic Monte Carlo With Distributed Hop Length And Trapped Time
-We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the hop lengths and trapped times in addition to the event time.
+I use an alteration of the subvolume kinetic Monte Carlo [2] which samples the hop lengths and trapped times in addition to the event time.
 
 #### SKMCHT Simulation Steps
 1. Domain area/volume is divided into *K* lattice cells.
@@ -108,7 +108,7 @@ We use an alteration of the subvolume kinetic Monte Carlo [2] which samples the 
 10. Repeat steps 4-9 for subsequent iterations until desired iteration or time limit is reached.
 
 ### Results Of Bacteria Hopping And Trapping Simulations
-We ran 10-minute simulations of a single bacteria transitioning between trapped states in a domain volume. We ran the simulation 100000 times, averaging over the diffusion coefficient as a function of iterations; this is shown in the figure on the left. We compared our simulated diffusion coefficients average over 100000 iterations against the measured coefficients of [4] for pore distributions with characteristic pore sizes 3.6, 2.5, and 1.9 &mu;m in the figure on the right. We found that the measured diffusivities of the experiments in [4] are about (0.9+-0.1) times our simulated diffusivities averaged over 100000 10-minute iterations. The measured diffusivities in [4] are reported to the nearest 0.5 &mu;m^2/s and so our simulated values for pores of sizes 1.9 &mu;m and 2.5 &mu;m agree quite well for this level of precision in the measured values. Our simulated diffusivity for pores of size 3.6 &mu;m is closer to 2.5 &mu;m^2/s than the reported measured value of about 2 &mu;m^2/s, which we attribute to the bacteria spending less time trapped and more time hopping. Since our model assumes the hopping time to be negligible, we always underestimate the transition times and so our simulated values always overestimate the measured diffusivities.
+I ran 10-minute simulations of a single bacteria transitioning between trapped states in a domain volume. I ran the simulation 100000 times, averaging over the diffusion coefficient as a function of iterations; this is shown in the figure on the left. I compared our simulated diffusion coefficients average over 100000 iterations against the measured coefficients of [4] for pore distributions with characteristic pore sizes 3.6, 2.5, and 1.9 &mu;m in the figure on the right. I found that the measured diffusivities of the experiments in [4] are about (0.9+-0.1) times our simulated diffusivities averaged over 100000 10-minute iterations. The measured diffusivities in [4] are reported to the nearest 0.5 &mu;m^2/s and so our simulated values for pores of sizes 1.9 &mu;m and 2.5 &mu;m agree quite well for this level of precision in the measured values. Our simulated diffusivity for pores of size 3.6 &mu;m is closer to 2.5 &mu;m^2/s than the reported measured value of about 2 &mu;m^2/s, which I attribute to the bacteria spending less time trapped and more time hopping. Since our model assumes the hopping time to be negligible, I always underestimate the transition times and so our simulated values always overestimate the measured diffusivities.
 
 <img src="SKMCHT_DiffusionIters.png " width="500" height="375"><img src="SKMCHT_KMCvsEXP.png " width="500" height="375">
 
@@ -128,10 +128,10 @@ We ran 10-minute simulations of a single bacteria transitioning between trapped 
 ## 3. Bacteria Bus Ride
 ![BacteriaBusRide2D](https://user-images.githubusercontent.com/62254347/118174728-09026780-b3e4-11eb-987f-f3936eb19c82.gif)
 
-It has been observed that some bacteria will cluster to swim faster. We can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again. Perhaps our model will yield the bacteria clustering phenomenon similar to the static nanodomain case of protein clustering.
+It has been observed that some bacteria will cluster to swim faster. I can model a periodic highway of bacteria clusters and bacteria diffusing in the middle of this highway. The clusters would be modeled as microdomains that translate in time. In these moving microdomains, the mobility of the bacteria relative to the microdomain would be limited due to the clustering of bacteria and so the hopping rates in the microdomains would be slower than outside of them. So, if a bacteria hops into a microdomain, it would be essentially carried off by the microdomain and deposited into another domain patch after a time. Then, the bacteria would swim freely until another cluster picks it up again. Perhaps our model will yield the bacteria clustering phenomenon similar to the static nanodomain case of protein clustering.
 
 ### Subvolume Kinetic Monte Carlo With Translating Microdomains
-We use an alteration of the subvolume kinetic Monte Carlo [2] which includes interval checks between iterations for a microdomain that translate at a constant velocity.
+I use an alteration of the subvolume kinetic Monte Carlo [2] which includes interval checks between iterations for a microdomain that translate at a constant velocity.
 
 #### SKMCTM Simulation Steps
 1. Domain volume is divided into *K* lattice cells.
