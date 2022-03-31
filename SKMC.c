@@ -48,7 +48,7 @@ int main() {
   /* Nin is for the number of proteins inside the nanodomain
      and Ntot is for the total number of proteins across 
      all lattice cells */
-  int Nin = 0, Ntot = 0;
+  int Nin = 0, Ntot = 1000;
 
   /* tlambda will hold the sampled event time in lattice lambda */
   /* tgamma will hold the sampled event time in lattice gamma */
