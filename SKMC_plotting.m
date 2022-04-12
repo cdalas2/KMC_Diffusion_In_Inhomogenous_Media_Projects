@@ -35,7 +35,7 @@
 clear all
 close all
 clc
-PositionsData = load("SKMC.o");
+PositionsData = load("SKMC.out");
 Sender = PositionsData(1:end-1,1)+1;
 Receiver = PositionsData(1:end-1,2)+1;
 rho = PositionsData(1:end-1,3);
@@ -80,6 +80,7 @@ snapiter = 1;
 M(snapiter) = getframe(gcf);
 writeVideo(v,M(snapiter));
 SNAPSHOT_RATE = 5000;
+
 for step = 1:(length(simT)-1)
     ChosenOne = randi(N(Sender(step)));
     k = find(ParticleLocation == Sender(step),N(Sender(step)));

@@ -33,7 +33,7 @@ USAGE
 #define TAU_IN (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_IN) /* time between hops inside nanodomain (W) */
 #define TAU_OUT (LATTICE_CELL_LENGTH*LATTICE_CELL_LENGTH/D_OUT) /* time between hops outside nanodomain (W) */
 #define TIME_MAX 600.0
-#define SCALE 1 
+#define SCALE 1
 #define DIM 2
 #define LETTERS_CELL_NUM 146
 
@@ -48,7 +48,7 @@ int main() {
   /* Nin is for the number of proteins inside the nanodomain
      and Ntot is for the total number of proteins across 
      all lattice cells */
-  int Nin = 0, Ntot = 1000;
+  int Nin = 0, Ntot = 0;
 
   /* tlambda will hold the sampled event time in lattice lambda */
   /* tgamma will hold the sampled event time in lattice gamma */
